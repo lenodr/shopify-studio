@@ -5,10 +5,6 @@
   assign og_description = page_description | default: shop.description | default: shop.name
 
   if request.page_type == 'product'
-    assign page_image = product.featured_media.preview_image
-  endif
-
-  if request.page_type == 'product'
     assign og_type = 'product'
   elsif request.page_type == 'article'
     assign og_type = 'article'

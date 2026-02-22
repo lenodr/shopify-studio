@@ -1,5 +1,5 @@
-{{ 'component-slideshow.aio.min.css' | asset_url | stylesheet_tag }}
-{{ 'component-slider.aio.min.css' | asset_url | stylesheet_tag }}
+{{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign social_icons = true
@@ -15,7 +15,7 @@
 -%}
 
 {% if social_icons %}
-  {{ 'component-list-social.aio.min.css' | asset_url | stylesheet_tag }}
+  {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
 <div
@@ -186,13 +186,13 @@
       "unit": "s",
       "label": "t:sections.announcement-bar.settings.change_slides_speed.label",
       "default": 5
-    },
+    },    
     {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-4"
-    },
+    },  
     {
       "type": "checkbox",
       "id": "show_line_separator",
@@ -205,8 +205,8 @@
     },
     {
       "type": "paragraph",
-      "content": "t:sections.announcement-bar.settings.paragraph.content"
-    },
+         "content": "t:sections.announcement-bar.settings.paragraph.content"
+    },             
     {
       "type": "checkbox",
       "id": "show_social",

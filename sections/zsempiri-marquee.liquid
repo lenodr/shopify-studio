@@ -1,0 +1,117 @@
+{{ 'zsempiri-homepage.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign speed = section.settings.speed | default: 28
+  assign bg_color = section.settings.bg_color | default: '#7b512f'
+  assign text_color = section.settings.text_color | default: '#f3ecdc'
+  assign padding_v = section.settings.padding_vertical | default: 10
+-%}
+
+<div
+  class="zsempiri-marquee"
+  role="region"
+  aria-label="Brand highlights"
+  style="background-color: {{ bg_color }}; color: {{ text_color }}; padding-top: {{ padding_v }}px; padding-bottom: {{ padding_v }}px;"
+>
+  <div class="zsempiri-marquee__track" style="animation-duration: {{ speed }}s;">
+    {%- comment -%}Első másolat{%- endcomment -%}
+    <div class="zsempiri-marquee__group">
+      {%- for block in section.blocks -%}
+        <span class="zsempiri-marquee__item" style="color: {{ text_color }};" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <span class="zsempiri-marquee__item-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+          {%- endif -%}
+          {{ block.settings.text }}
+        </span>
+      {%- endfor -%}
+    </div>
+    {%- comment -%}Második másolat — seamless loop{%- endcomment -%}
+    <div class="zsempiri-marquee__group" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <span class="zsempiri-marquee__item" style="color: {{ text_color }};">
+          {%- if block.settings.icon != blank -%}
+            <span class="zsempiri-marquee__item-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+          {%- endif -%}
+          {{ block.settings.text }}
+        </span>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Zsempiri — Marquee",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Háttérszín",
+      "default": "#7b512f"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Szövegszín",
+      "default": "#f3ecdc"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "s",
+      "label": "Görgetési sebesség",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 6,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Függőleges belső tér",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee elem",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Szöveg",
+          "default": "Kézzel készített"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji / ikon",
+          "info": "Emoji vagy unicode karakter, pl. 🌿 vagy ✦",
+          "default": "🌿"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zsempiri — Marquee",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Egyedi Gravírozás", "icon": "✍️" } },
+        { "type": "item", "settings": { "text": "Gyors Szállítás", "icon": "🚚" } },
+        { "type": "item", "settings": { "text": "Magyar Kézimunka", "icon": "🇭🇺" } },
+        { "type": "item", "settings": { "text": "Ajándékra Kész Csomag", "icon": "🎁" } },
+        { "type": "item", "settings": { "text": "Kézzel Készített", "icon": "🌿" } },
+        { "type": "item", "settings": { "text": "Tömör Nyírfa", "icon": "🪵" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

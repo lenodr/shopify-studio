@@ -1,0 +1,510 @@
+/* ============================================================
+   ZSEMPIRI GLOBAL — Dawn v15.4.1
+   Grandstander (headings) + Jost (body) | Zsempiri warm palette
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Jost:wght@400;500;600;700&display=swap');
+
+
+/* ============================================================
+   A. DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --zsempiri-cream:    #f3ecdc;
+  --zsempiri-card-bg:  #FAF9F6;
+  --zsempiri-wood:     #7b512f;
+  --zsempiri-tan:      #c9a882;
+  --zsempiri-sage:     #8F9779;
+  --zsempiri-accent-1: #d4bb9b;
+  --zsempiri-accent-2: #c18763;
+  --zsempiri-accent-3: #b2805a;
+}
+
+
+/* ============================================================
+   B. TYPOGRAPHY
+   Dawn a --font-heading-family és --font-body-family változókat
+   a theme.liquid {% style %} blokkjából tölti be (Shopify font format).
+   !important-tal felülírjuk Google Fonts-ra.
+   ============================================================ */
+
+body {
+  font-family: 'Jost', 'Helvetica Neue', Arial, sans-serif !important;
+  color: var(--zsempiri-wood);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Grandstander', 'Georgia', cursive !important;
+  color: var(--zsempiri-wood);
+}
+
+.rte p,
+.rte li,
+.rte blockquote {
+  font-family: 'Jost', sans-serif;
+  color: var(--zsempiri-wood);
+}
+
+a:not(.button):not([class*="btn"]) {
+  color: var(--zsempiri-wood);
+  text-decoration-color: rgba(123, 81, 47, 0.3);
+}
+
+a:not(.button):not([class*="btn"]):hover {
+  color: var(--zsempiri-accent-2);
+}
+
+.caption,
+.caption-large,
+.caption-with-letter-spacing {
+  font-family: 'Jost', sans-serif;
+  color: rgba(123, 81, 47, 0.75);
+}
+
+
+/* ============================================================
+   C. GLOBAL BACKGROUND
+   Dawn .gradient { background: rgb(var(--color-background)) }
+   A scheme-1 #f3ecdc-t kap a settings_data.json-ból,
+   tehát ez automatikusan cream lesz. Extra biztosíték:
+   ============================================================ */
+
+body {
+  background-color: var(--zsempiri-cream) !important;
+}
+
+.gradient {
+  background-color: var(--zsempiri-cream) !important;
+  background-attachment: scroll !important;
+}
+
+.color-scheme-1 {
+  background-color: var(--zsempiri-cream) !important;
+}
+
+
+/* ============================================================
+   D. WOOD GRAIN TEXTURE (body::before)
+   z-index: 1 — modálok/dropdown-ok ALATT marad
+   ============================================================ */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { opacity: 0.02; }
+}
+
+.shopify-design-mode body::before { opacity: 0.02; }
+
+
+/* ============================================================
+   E. FLOATING PILL HEADER
+   Dawn header struktúra:
+   .shopify-section-header > .header-wrapper > .header
+   ============================================================ */
+
+.shopify-section-header {
+  background: transparent !important;
+}
+
+.header-wrapper {
+  margin: 1.2rem 1.6rem 0 !important;
+  border-radius: 10rem !important;
+  background-color: rgba(243, 236, 220, 0.90) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(212, 187, 155, 0.45) !important;
+  box-shadow: 0 4px 24px rgba(123, 81, 47, 0.10) !important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Scrollnál: tömörebb glassmorphism */
+.shopify-section-header-sticky .header-wrapper {
+  background-color: rgba(243, 236, 220, 0.97) !important;
+  box-shadow: 0 6px 32px rgba(123, 81, 47, 0.16) !important;
+}
+
+.header {
+  padding-top: 0.8rem !important;
+  padding-bottom: 0.8rem !important;
+}
+
+/* Nav linkek */
+.header__heading-link,
+.list-menu__item--link,
+.header__menu-item span,
+.header__menu-item a {
+  color: var(--zsempiri-wood) !important;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+}
+
+.list-menu__item--link:hover,
+.header__menu-item:hover span,
+.header__menu-item:hover a {
+  color: var(--zsempiri-accent-2) !important;
+  opacity: 1 !important;
+}
+
+/* Header ikonok (search, cart, account) */
+.header__icon svg,
+.header__icon .icon {
+  color: var(--zsempiri-wood);
+}
+
+/* Kosár db buborék — sage zöld */
+.cart-count-bubble {
+  background-color: var(--zsempiri-sage) !important;
+  color: #ffffff !important;
+  font-family: 'Jost', sans-serif;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 749px) {
+  .header-wrapper {
+    margin: 0.8rem 1rem 0 !important;
+    border-radius: 6rem !important;
+  }
+}
+
+
+/* ============================================================
+   F. BUTTON RENDSZER
+   Dawn --buttons-radius: 40px (settings_data.json-ból)
+   ============================================================ */
+
+.button,
+.button--primary,
+button[type="submit"]:not(.shopify-payment-button__button--unbranded):not(.quantity__button) {
+  font-family: 'Grandstander', cursive !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* Elsődleges: sage zöld */
+.button,
+.button--primary {
+  background-color: var(--zsempiri-sage) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* Másodlagos: meleg körvonal */
+.button--secondary {
+  background-color: transparent !important;
+  color: var(--zsempiri-wood) !important;
+  border: 1.5px solid var(--zsempiri-accent-1) !important;
+}
+
+.button--secondary:hover:not([disabled]) {
+  border-color: var(--zsempiri-accent-2) !important;
+  background-color: rgba(212, 187, 155, 0.15) !important;
+}
+
+/* Hover lift */
+.button:hover:not([disabled]),
+.button--primary:hover:not([disabled]) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(123, 81, 47, 0.22) !important;
+}
+
+.button:active:not([disabled]) {
+  transform: translateY(0) !important;
+}
+
+/* Dynamic checkout wrapper */
+.shopify-payment-button__button {
+  border-radius: 4rem !important;
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   G. KÁRTYA / ISLAND RENDSZER
+   Kártyák: off-white (#FAF9F6) lebegnek a cream (#f3ecdc) fölött
+   ============================================================ */
+
+.card--card,
+.card--standard .card__inner {
+  background-color: var(--zsempiri-card-bg);
+}
+
+.card-wrapper .card--card,
+.card-wrapper .card--standard {
+  box-shadow: 0 0.6rem 2rem rgba(123, 81, 47, 0.10) !important;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-wrapper:hover .card--card,
+.card-wrapper:hover .card--standard {
+  transform: translateY(-3px);
+  box-shadow: 0 1.2rem 3rem rgba(123, 81, 47, 0.16) !important;
+}
+
+.card__heading,
+.card__heading a {
+  font-family: 'Grandstander', cursive !important;
+  color: var(--zsempiri-wood) !important;
+}
+
+.card .price-item {
+  color: var(--zsempiri-wood);
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+}
+
+.card .price-item--sale {
+  color: var(--zsempiri-accent-3);
+}
+
+/* Quick add gomb kártyán */
+.card__content .quick-add__submit,
+.quick-add-modal__toggle {
+  background-color: var(--zsempiri-sage) !important;
+  color: #ffffff !important;
+  border-radius: 4rem !important;
+  font-family: 'Grandstander', cursive !important;
+  font-weight: 700 !important;
+}
+
+
+/* ============================================================
+   H. FORM INPUTOK
+   ============================================================ */
+
+input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+select,
+textarea,
+.field__input,
+.select__select {
+  border-color: var(--zsempiri-accent-1) !important;
+  background-color: #FFFDF8 !important;
+  color: var(--zsempiri-wood) !important;
+  font-family: 'Jost', sans-serif !important;
+}
+
+input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+select:focus,
+textarea:focus,
+.field__input:focus {
+  border-color: var(--zsempiri-accent-2) !important;
+  outline: 2px solid rgba(193, 135, 99, 0.25) !important;
+  outline-offset: 0;
+}
+
+::placeholder {
+  color: rgba(123, 81, 47, 0.40) !important;
+  font-family: 'Jost', sans-serif;
+}
+
+.field__label,
+.form__label {
+  font-family: 'Jost', sans-serif;
+  color: var(--zsempiri-wood);
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   I. VARIANT PILL-EK
+   ============================================================ */
+
+.swatch-input__input + label,
+.product-form__input--pill label {
+  border-color: var(--zsempiri-accent-1);
+  color: var(--zsempiri-wood);
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.swatch-input__input:checked + label,
+.product-form__input--pill input:checked + label {
+  border-color: var(--zsempiri-sage) !important;
+  background-color: var(--zsempiri-sage) !important;
+  color: #ffffff !important;
+}
+
+
+/* ============================================================
+   J. ÁR + BADGE
+   ============================================================ */
+
+.price-item--sale,
+.price__sale .price-item--sale {
+  color: var(--zsempiri-accent-3);
+}
+
+.price-item--regular,
+.price__regular .price-item--regular {
+  color: var(--zsempiri-wood);
+  font-family: 'Jost', sans-serif;
+  font-weight: 700;
+}
+
+.badge {
+  font-family: 'Jost', sans-serif;
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   K. ANNOUNCEMENT BAR
+   ============================================================ */
+
+.announcement-bar {
+  background-color: var(--zsempiri-wood) !important;
+}
+
+.announcement-bar__message,
+.announcement-bar__message p,
+.announcement-bar__message a {
+  color: var(--zsempiri-cream) !important;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   L. FOOTER
+   ============================================================ */
+
+.footer {
+  background-color: var(--zsempiri-cream) !important;
+  border-top: 1px solid var(--zsempiri-accent-1);
+}
+
+.footer__heading {
+  font-family: 'Grandstander', cursive !important;
+  color: var(--zsempiri-wood);
+}
+
+.footer p,
+.footer li,
+.footer a:not(.button) {
+  font-family: 'Jost', sans-serif;
+  color: rgba(123, 81, 47, 0.80);
+}
+
+.footer a:not(.button):hover {
+  color: var(--zsempiri-accent-2);
+}
+
+
+/* ============================================================
+   M. CART FIGYELMEZTETÉS & DRAWER
+   ============================================================ */
+
+.cart-notification,
+.drawer {
+  background-color: var(--zsempiri-card-bg) !important;
+}
+
+.cart-notification__heading,
+.cart-drawer__heading,
+.drawer__heading {
+  font-family: 'Grandstander', cursive;
+  color: var(--zsempiri-wood);
+}
+
+.cart-notification-product__name,
+.cart-item__name {
+  font-family: 'Jost', sans-serif;
+  color: var(--zsempiri-wood);
+}
+
+.totals__total-value {
+  font-family: 'Grandstander', cursive;
+  color: var(--zsempiri-wood);
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   N. PREDIKTÍV KERESÉS
+   ============================================================ */
+
+.predictive-search,
+.global-settings-popup {
+  background-color: var(--zsempiri-card-bg) !important;
+  border-color: var(--zsempiri-accent-1) !important;
+  border-radius: 1.6rem !important;
+  box-shadow: 0 1.2rem 3rem rgba(123, 81, 47, 0.12) !important;
+}
+
+.predictive-search__heading {
+  font-family: 'Grandstander', cursive;
+  color: var(--zsempiri-wood);
+}
+
+.predictive-search__item-heading {
+  font-family: 'Jost', sans-serif;
+  color: var(--zsempiri-wood);
+}
+
+.predictive-search__item:hover,
+.predictive-search__item:focus {
+  background-color: rgba(212, 187, 155, 0.20) !important;
+}
+
+
+/* ============================================================
+   O. SECTION HEADINGEK OLDALSÁVON
+   ============================================================ */
+
+.title,
+.section-header .title,
+.featured-collection .title,
+.collection-list .title,
+.rich-text__heading,
+.image-with-text__heading,
+.multicolumn-card__title {
+  font-family: 'Grandstander', cursive !important;
+  color: var(--zsempiri-wood) !important;
+}
+
+.image-with-text__text,
+.rich-text__text,
+.multicolumn-card__info {
+  font-family: 'Jost', sans-serif !important;
+  color: rgba(123, 81, 47, 0.85) !important;
+}
+
+
+/* ============================================================
+   P. FÓKUSZ, SCROLLBAR, SPINNER
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--zsempiri-accent-2) !important;
+  outline-offset: 3px !important;
+  border-radius: 0.4rem;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--zsempiri-cream); }
+::-webkit-scrollbar-thumb {
+  background-color: var(--zsempiri-accent-1);
+  border-radius: 4px;
+  border: 2px solid var(--zsempiri-cream);
+}
+::-webkit-scrollbar-thumb:hover { background-color: var(--zsempiri-accent-2); }
+
+.loading__spinner .path,
+.loading-overlay__spinner .path {
+  stroke: var(--zsempiri-sage) !important;
+}

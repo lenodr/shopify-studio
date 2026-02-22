@@ -1,15 +1,15 @@
-{{ 'component-card.aio.min.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.aio.min.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
 
-{{ 'component-slider.aio.min.css' | asset_url | stylesheet_tag }}
-{{ 'template-collection.aio.min.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image_shape == 'blob' %}
-  {{ 'mask-blobs.aio.min.css' | asset_url | stylesheet_tag }}
+  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
 {%- unless section.settings.quick_add == 'none' -%}
-  {{ 'quick-add.aio.min.css' | asset_url | stylesheet_tag }}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
 

@@ -3595,12 +3595,3 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
-.price .price-item {
-    font-weight: 700 !important;  
-    font-size: 1.2em !important; 
-    color: #4A403A;             
-}
-
-.product__info-container .price .price-item {
-    font-size: 1.4em !important; 
-}

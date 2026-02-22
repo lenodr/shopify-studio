@@ -1,1 +1,203 @@
-{"sections":{"image_banner_CtTKJg":{"type":"image-banner","blocks":{"heading_xUB74g":{"type":"heading","settings":{"heading":"Kézzelfogható emlék egy digitális világban.","heading_size":"h1"}},"text_rCdygB":{"type":"text","settings":{"text":"Unod a pixeleket és az olcsó műanyagot? Mi is. Ezért csinálunk olyan tárgyakat, amiket jó megfogni, és amikre jó ránézni évek múlva is. Tömör fa, őszinte munka, nulla bullshit.","text_style":"body"}},"buttons_DNjTnB":{"type":"buttons","settings":{"button_label_1":"Valami maradandót keresek!","button_link_1":"shopify:\/\/collections","button_style_secondary_1":false,"button_label_2":"","button_link_2":"","button_style_secondary_2":false}}},"block_order":["heading_xUB74g","text_rCdygB","buttons_DNjTnB"],"name":"t:sections.image-banner.presets.name","settings":{"image":"shopify:\/\/shop_images\/b1_9dadf162-4cad-4483-8094-6808ba9ba13a.png","image_overlay_opacity":0,"image_height":"medium","image_behavior":"none","desktop_content_position":"middle-center","desktop_content_alignment":"center","show_text_box":true,"color_scheme":"","stack_images_on_mobile":true,"mobile_content_alignment":"center","show_text_below":true}},"multicolumn_AEXyHJ":{"type":"multicolumn","blocks":{"column_PhUhMn":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/pajzs_5479c437-e0b0-43e5-a0f1-40fd88a3c263.png","title":"<strong>Időtálló minőség, kompromisszumok nélkül<\/strong>","text":"<p>Nem kell aggódnod a törékeny illúziók miatt. Termékeink masszív fából készülnek, hogy generációkon át őrizzék az üzenetedet.<br\/><br\/><\/p>","link_label":"","link":""}},"column_TfAf7M":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/3_a203ebbb-a8da-416e-b80d-7b5776e7d4b8.png","title":"<strong>Személyes, nem sablon<\/strong>","text":"<p>A neveddel, a dátumoddal, a te sztoriddal. Végre egy ajándék, aminél nem az jut az eszükbe, hogy \"ezzel letudta a kötelezőt\".<\/p>","link_label":"","link":""}},"column_xKiGJA":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/haziko.png","title":"<strong>Emberi garancia<\/strong>","text":"<p>Ha a futár focizott a csomaggal, vagy mi néztünk be valamit, nem bújunk el az ÁSZF mögé. Írsz, és megoldjuk.<\/p>","link_label":"","link":""}}},"block_order":["column_PhUhMn","column_TfAf7M","column_xKiGJA"],"name":"t:sections.multicolumn.presets.name","settings":{"title":"Mit kapsz te?","heading_size":"h1","image_width":"third","image_ratio":"adapt","button_label":"","button_link":"","columns_desktop":3,"column_alignment":"left","background_style":"primary","color_scheme":"scheme-1","columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":76}},"rich-text":{"type":"rich-text","blocks":{"heading":{"type":"heading","settings":{"heading":"Szezonális Termékek","heading_size":"h1"}}},"block_order":["heading"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-1","full_width":true,"padding_top":32,"padding_bottom":52}},"featured-collection":{"type":"featured-collection","settings":{"collection":"kiemelt-termekek","products_to_show":3,"title":"","heading_size":"h1","description":"","show_description":false,"description_style":"body","columns_desktop":3,"enable_desktop_slider":false,"full_width":false,"show_view_all":false,"view_all_style":"solid","color_scheme":"scheme-1","image_ratio":"portrait","image_shape":"default","show_secondary_image":true,"show_vendor":true,"show_rating":false,"quick_add":"standard","columns_mobile":"1","swipe_on_mobile":true,"padding_top":28,"padding_bottom":0}},"image_with_text_DfRJcX":{"type":"image-with-text","blocks":{"heading_TDGQ9D":{"type":"heading","settings":{"heading":"Hogy zökkenő mentesen induljon a nap.","heading_size":"h1"}},"text_RMP6at":{"type":"text","settings":{"text":"<p>Két választásod van: elmondod tízszer, hogy \"moss fogat\", és a végén mindenki ideges... vagy rámutatsz a táblára. Ez nem varázslat, csak egy mankó, hogy a gyerek tudja a dolgát, te meg nem kapsz agyvérzést 7:30-kor. Mindenki nyer.<\/p>","text_style":"body"}},"button_QtyhHr":{"type":"button","settings":{"button_label":"Kérem a reggeli békét!","button_link":"shopify:\/\/products\/napi-rutin-jutalomtabla-csillaggyujto","button_style_secondary":false}}},"block_order":["heading_TDGQ9D","text_RMP6at","button_QtyhHr"],"name":"t:sections.image-with-text.presets.name","settings":{"image":"shopify:\/\/shop_images\/LanyNR08.jpg","height":"adapt","desktop_image_width":"medium","layout":"image_first","image_behavior":"none","content_layout":"no-overlap","desktop_content_position":"top","desktop_content_alignment":"left","mobile_content_alignment":"left","section_color_scheme":"","color_scheme":"scheme-3","padding_top":36,"padding_bottom":36}},"1770918096722cbf1b":{"type":"apps","blocks":{"judge_me_reviews_cards_carousel_KhYfqr":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/cards_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{"show_sample_reviews":true,"reviews_selection":"all","products":[],"star_rating":"all","show_review_media":true,"display_order":"media_first","no_image_fallback":"product_image","max_reviews":20,"review_length":"medium","text_size":"medium","image_ratio":"1","reviews_shown":3,"show_reviewer_name":false,"show_product_name":true,"hide_arrows_mobile":true,"arrows_position":"sides","max_width":1100,"corner_styling":"round","header_text_color":"#4a403a","text_color":"#4a403a","card_color":"#f3f1ee","stars_color":"#c4a064","arrows_color":"#4a403a","transition_speed":5,"header_text":"Rólunk mondtátok","show_average_rating":true}}},"block_order":["judge_me_reviews_cards_carousel_KhYfqr"],"settings":{"include_margins":true}},"multicolumn_JHLPfQ":{"type":"multicolumn","blocks":{"column_3jL3ra":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/csillagok_03bbf9de-7731-49f1-904a-e1f365373198.png","title":"Zora88","text":"<p>Gyönyörű termékeket kaptam, atombiztos csomagolásban, gyorsan postázva. Szívből ajánlom az eladót❤️<\/p>","link_label":"","link":""}},"column_87XH86":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/csillagok_03bbf9de-7731-49f1-904a-e1f365373198.png","title":"Burgibea85","text":"<p>Nagyon tetszett a jutalomtábla! Szép, igényesen megcsinált mintákkal. És plusz pont a meglepi ajándékért is! Ajánlanám másoknak is!<\/p>","link_label":"","link":""}},"column_LYW8RL":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/csillagok_03bbf9de-7731-49f1-904a-e1f365373198.png","title":"Gysarolta","text":"<p>Azt kaptam amit vártam. Gyors volt a kiszállítás. Ajánlani tudom.<\/p>","link_label":"","link":""}}},"block_order":["column_3jL3ra","column_87XH86","column_LYW8RL"],"custom_css":[".multicolumn-card__image-wrapper {max-width: 120px !important; margin: 0 auto !important;}"],"name":"t:sections.multicolumn.presets.name","settings":{"title":"","heading_size":"h1","image_width":"full","image_ratio":"adapt","button_label":"","button_link":"","columns_desktop":3,"column_alignment":"left","background_style":"primary","color_scheme":"scheme-1","columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":36}},"featured_collection_cbccwt":{"type":"featured-collection","custom_css":[],"name":"t:sections.featured-collection.presets.name","settings":{"collection":"best-sellers","products_to_show":3,"title":"Legjobban keresett","heading_size":"h1","description":"","show_description":false,"description_style":"body","columns_desktop":3,"enable_desktop_slider":true,"full_width":false,"show_view_all":true,"view_all_style":"solid","color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"quick_add":"standard","columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":36}},"collection_list_yBtYtr":{"type":"collection-list","blocks":{"featured_collection_drNYdj":{"type":"featured_collection","settings":{"collection":"gyerekvilag"}},"featured_collection_XG7ah9":{"type":"featured_collection","settings":{"collection":"otthon"}},"featured_collection_gNQtQd":{"type":"featured_collection","settings":{"collection":"ajandekotletek"}},"featured_collection_fxwFT6":{"type":"featured_collection","settings":{"collection":"kiegeszitok"}}},"block_order":["featured_collection_drNYdj","featured_collection_XG7ah9","featured_collection_gNQtQd","featured_collection_fxwFT6"],"name":"t:sections.collection-list.presets.name","settings":{"title":"Ezeket készítjük","heading_size":"h1","image_ratio":"square","columns_desktop":4,"color_scheme":"","show_view_all":false,"columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":36}},"image_with_text_prBjAi":{"type":"image-with-text","blocks":{"heading_HhRLFF":{"type":"heading","settings":{"heading":"Láttad Pinteresten, de sehol nem kapni?","heading_size":"h1"}},"text_RGRjgK":{"type":"text","settings":{"text":"<p>Vagy csak van egy elvetemült ötleted, amitől mindenki más a fejét fogja? Ne tartsd magadban.<br\/>Mivel mi tervezünk és gyártunk, nem vagyunk a katalógushoz kötve. Írd meg, mit álmodtál meg (küldj fotót, rajzot, vagy füstjeleket), mi meg megnézzük, hogyan lehet megcsinálni.<\/p>","text_style":"body"}},"button_K4wrDL":{"type":"button","settings":{"button_label":"Ezt valósítsátok meg!","button_link":"shopify:\/\/pages\/contact","button_style_secondary":false}}},"block_order":["heading_HhRLFF","text_RGRjgK","button_K4wrDL"],"custom_css":[],"name":"t:sections.image-with-text.presets.name","settings":{"image":"shopify:\/\/shop_images\/otlet_7189c640-4999-4943-b3d8-dc3f87393d9f.png","height":"adapt","desktop_image_width":"medium","layout":"text_first","image_behavior":"none","content_layout":"no-overlap","desktop_content_position":"top","desktop_content_alignment":"left","mobile_content_alignment":"left","section_color_scheme":"scheme-3","color_scheme":"","padding_top":36,"padding_bottom":36}}},"order":["image_banner_CtTKJg","multicolumn_AEXyHJ","rich-text","featured-collection","image_with_text_DfRJcX","1770918096722cbf1b","multicolumn_JHLPfQ","featured_collection_cbccwt","collection_list_yBtYtr","image_with_text_prBjAi"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Kézzelfogható emlék egy digitális világban.",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Tömör fa, őszinte munka. Egyedi gravírozással, ajándékra készen.",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Valami maradandót keresek!",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/b1_9dadf162-4cad-4483-8094-6808ba9ba13a.png",
+        "image_overlay_opacity": 20,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": true,
+        "color_scheme": "scheme-1",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "zsempiri_marquee": {
+      "type": "zsempiri-marquee",
+      "blocks": {
+        "item1": {
+          "type": "item",
+          "settings": {
+            "text": "Egyedi Gravírozás",
+            "icon": "✍️"
+          }
+        },
+        "item2": {
+          "type": "item",
+          "settings": {
+            "text": "Gyors Szállítás",
+            "icon": "🚚"
+          }
+        },
+        "item3": {
+          "type": "item",
+          "settings": {
+            "text": "Magyar Kézimunka",
+            "icon": "🇭🇺"
+          }
+        },
+        "item4": {
+          "type": "item",
+          "settings": {
+            "text": "Ajándékra Kész",
+            "icon": "🎁"
+          }
+        },
+        "item5": {
+          "type": "item",
+          "settings": {
+            "text": "Kézzel Készített",
+            "icon": "🌿"
+          }
+        },
+        "item6": {
+          "type": "item",
+          "settings": {
+            "text": "Tömör Nyírfa",
+            "icon": "🪵"
+          }
+        }
+      },
+      "block_order": [
+        "item1",
+        "item2",
+        "item3",
+        "item4",
+        "item5",
+        "item6"
+      ],
+      "settings": {
+        "bg_color": "#7b512f",
+        "text_color": "#f3ecdc",
+        "speed": 28,
+        "padding_vertical": 10
+      }
+    },
+    "zsempiri_tiles": {
+      "type": "zsempiri-category-tiles",
+      "blocks": {
+        "tile1": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Kesz_husveti_kosar_celofanba_csomagolva_szalaggal_keszre_csomagolt_ajandek.jpg",
+            "label": "Ajándékok",
+            "link": "/collections/ajandekoknak"
+          }
+        },
+        "tile2": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/fali-disz-nevre-szolo-gyerekszoba.jpg",
+            "label": "Gyerekvilág",
+            "link": "/collections/gyerekeknek"
+          }
+        },
+        "tile3": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/hero.jpg",
+            "label": "Otthon",
+            "link": "/collections/otthonra"
+          }
+        },
+        "tile4": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/matrica-iv.jpg",
+            "label": "Kiegészítők",
+            "link": "/collections/kiegeszitok"
+          }
+        }
+      },
+      "block_order": [
+        "tile1",
+        "tile2",
+        "tile3",
+        "tile4"
+      ],
+      "settings": {
+        "heading": "Böngéssz kategória szerint",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Legújabb termékeink",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "zsempiri_marquee",
+    "zsempiri_tiles",
+    "featured_collection"
+  ]
+}
