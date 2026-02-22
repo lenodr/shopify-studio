@@ -182,12 +182,12 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#f3ecdc",
+          "background": "#faf9f6",
           "background_gradient": "",
           "text": "#7b512f",
-          "button": "#8F9779",
+          "button": "#8f9779",
           "button_label": "#ffffff",
-          "secondary_button_label": "#8F9779",
+          "secondary_button_label": "#8f9779",
           "shadow": "#7b512f"
         }
       },
@@ -240,9 +240,9 @@
           "background": "#f3ecdc",
           "background_gradient": "",
           "text": "#7b512f",
-          "button": "#8F9779",
+          "button": "#8f9779",
           "button_label": "#ffffff",
-          "secondary_button_label": "#8F9779",
+          "secondary_button_label": "#8f9779",
           "shadow": "#7b512f"
         }
       }

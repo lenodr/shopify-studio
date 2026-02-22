@@ -1,0 +1,332 @@
+/* ============================================================
+   ZSEMPIRI PRODUCT PAGE — Dawn v15.4.1
+   Product layout, media gallery, info panel, trust strip
+   ============================================================ */
+
+
+/* ============================================================
+   1. PRODUCT LAYOUT WRAPPER
+   ============================================================ */
+
+/* Pill header kompenzáció sticky info-nál */
+@media screen and (min-width: 750px) {
+  .product__column-sticky {
+    top: 8rem !important; /* pill header height + gap */
+  }
+}
+
+/* Oldalsó padding a page-width-en belül */
+.product.grid {
+  gap: 0 4rem;
+}
+
+@media screen and (min-width: 990px) {
+  .product.grid {
+    gap: 0 6rem;
+  }
+}
+
+
+/* ============================================================
+   2. MEDIA GALLERY (bal oldal)
+   ============================================================ */
+
+/* Fő kép — lekerekített sarok, meleg árnyék */
+.product__media-item .media,
+.product__media-item .global-media-settings {
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(123, 81, 47, 0.10);
+}
+
+/* Thumbnail lista aktív jelölés */
+.thumbnail[aria-current] {
+  box-shadow: 0 0 0 2px var(--zsempiri-sage) !important;
+  border-color: var(--zsempiri-sage) !important;
+  border-radius: 0.8rem;
+  opacity: 1;
+}
+
+.thumbnail {
+  border-radius: 0.8rem;
+  overflow: hidden;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.thumbnail:hover {
+  opacity: 1;
+}
+
+/* Thumbnail lista gap */
+.thumbnail-list {
+  gap: 0.8rem !important;
+}
+
+
+/* ============================================================
+   3. INFO PANEL (jobb oldal)
+   ============================================================ */
+
+/* Enyhe sziget-háttér az info panelen */
+@media screen and (min-width: 750px) {
+  .product__info-wrapper {
+    background-color: rgba(250, 249, 246, 0.70);
+    border-radius: 2.4rem;
+    padding: 2.8rem 3.2rem !important;
+    border: 1px solid rgba(212, 187, 155, 0.30);
+    box-shadow: 0 4px 20px rgba(123, 81, 47, 0.06);
+  }
+}
+
+/* Termék cím */
+.product__title h1,
+.product__title .h1 {
+  font-family: 'Grandstander', cursive !important;
+  color: var(--zsempiri-wood) !important;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+
+/* Vendor / gyártó sor */
+.product__text.caption-with-letter-spacing {
+  color: rgba(123, 81, 47, 0.55) !important;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Ár blokk */
+.product .price__container .price-item--regular {
+  font-family: 'Grandstander', cursive;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--zsempiri-wood);
+}
+
+.product .price__container .price-item--sale {
+  font-family: 'Grandstander', cursive;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--zsempiri-accent-3);
+}
+
+.product .price--on-sale .price-item--regular {
+  font-size: 1.6rem;
+  font-weight: 400;
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+/* Ár sor elválasztó */
+.product .price {
+  margin-bottom: 0.4rem;
+}
+
+/* Variants label */
+.product-form__input .form__label {
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(123, 81, 47, 0.70);
+  margin-bottom: 0.8rem;
+}
+
+/* Quantity input */
+.quantity {
+  border-color: var(--zsempiri-accent-1) !important;
+  border-radius: 4rem !important;
+  overflow: hidden;
+}
+
+.quantity__input {
+  color: var(--zsempiri-wood) !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 600;
+}
+
+.quantity__button {
+  color: var(--zsempiri-wood) !important;
+  background: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.quantity__button:hover {
+  background-color: rgba(212, 187, 155, 0.20) !important;
+}
+
+/* Product form submit */
+.product-form__submit.button {
+  font-size: 1.5rem;
+  padding: 1.4rem 2.8rem;
+  width: 100%;
+  max-width: 44rem;
+  letter-spacing: 0.04em;
+}
+
+/* Leírás blokk */
+.product__description {
+  font-family: 'Jost', sans-serif;
+  color: rgba(123, 81, 47, 0.80);
+  font-size: 1.5rem;
+  line-height: 1.7;
+  border-top: 1px solid rgba(212, 187, 155, 0.40);
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+.product__description h2,
+.product__description h3,
+.product__description strong {
+  font-family: 'Grandstander', cursive;
+  color: var(--zsempiri-wood);
+}
+
+/* Share gomb */
+.share-button .share-button__button {
+  color: rgba(123, 81, 47, 0.60);
+  font-family: 'Jost', sans-serif;
+  font-size: 1.3rem;
+}
+
+.share-button .share-button__button:hover {
+  color: var(--zsempiri-accent-2);
+}
+
+
+/* ============================================================
+   4. TRUST BADGE STRIP
+   "Zsempiri trust chip"-ek a vásárlási gombok alatt
+   Class: .zsempiri-trust-strip
+   ============================================================ */
+
+.zsempiri-trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(212, 187, 155, 0.30);
+  max-width: 44rem;
+}
+
+.zsempiri-trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(212, 187, 155, 0.18);
+  border: 1px solid rgba(212, 187, 155, 0.45);
+  border-radius: 10rem;
+  padding: 0.5rem 1.2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--zsempiri-wood);
+  white-space: nowrap;
+}
+
+.zsempiri-trust-chip__icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   5. PICKUP AVAILABILITY & INVENTORY
+   ============================================================ */
+
+.pickup-availability-information {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.3rem;
+  color: var(--zsempiri-wood);
+}
+
+.product__inventory {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.3rem;
+}
+
+
+/* ============================================================
+   6. ACCORDION (termék részletek)
+   ============================================================ */
+
+.product__accordion .accordion__title {
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  color: var(--zsempiri-wood);
+  font-size: 1.4rem;
+}
+
+.product__accordion summary:hover {
+  color: var(--zsempiri-accent-2);
+}
+
+.product__accordion .accordion__content {
+  font-family: 'Jost', sans-serif;
+  color: rgba(123, 81, 47, 0.80);
+  line-height: 1.65;
+}
+
+
+/* ============================================================
+   7. RELATED PRODUCTS section
+   ============================================================ */
+
+.related-products .title {
+  font-family: 'Grandstander', cursive !important;
+  color: var(--zsempiri-wood) !important;
+}
+
+
+/* ============================================================
+   8. BREADCRUMB (ha van)
+   ============================================================ */
+
+nav[aria-label="breadcrumbs"] a,
+.breadcrumbs a,
+.breadcrumb a {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.2rem;
+  color: rgba(123, 81, 47, 0.55);
+  text-decoration: none;
+}
+
+nav[aria-label="breadcrumbs"] a:hover,
+.breadcrumbs a:hover {
+  color: var(--zsempiri-accent-2);
+}
+
+nav[aria-label="breadcrumbs"] span,
+.breadcrumbs .breadcrumb__separator {
+  color: rgba(123, 81, 47, 0.35);
+}
+
+
+/* ============================================================
+   9. MOBILE OPTIMIZATIONS
+   ============================================================ */
+
+@media screen and (max-width: 749px) {
+  .product__info-wrapper {
+    padding: 2rem 1.6rem !important;
+  }
+
+  .product__title h1 {
+    font-size: 2.2rem;
+  }
+
+  .zsempiri-trust-strip {
+    max-width: 100%;
+  }
+
+  .product-form__submit.button {
+    max-width: 100%;
+  }
+}

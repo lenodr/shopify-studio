@@ -10,6 +10,7 @@
   {% endif %}
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'zsempiri-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -674,6 +675,58 @@
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
+              {%- when 'zsempiri_trust_badges' -%}
+                {%- liquid
+                  assign chips_count = 0
+                  if block.settings.chip_1 != blank
+                    assign chips_count = chips_count | plus: 1
+                  endif
+                  if block.settings.chip_2 != blank
+                    assign chips_count = chips_count | plus: 1
+                  endif
+                  if block.settings.chip_3 != blank
+                    assign chips_count = chips_count | plus: 1
+                  endif
+                  if block.settings.chip_4 != blank
+                    assign chips_count = chips_count | plus: 1
+                  endif
+                -%}
+                {%- if chips_count > 0 -%}
+                  <div class="zsempiri-trust-strip" {{ block.shopify_attributes }}>
+                    {%- if block.settings.chip_1 != blank -%}
+                      <span class="zsempiri-trust-chip">
+                        {%- if block.settings.icon_1 != blank -%}
+                          <span class="zsempiri-trust-chip__icon" aria-hidden="true">{{ block.settings.icon_1 }}</span>
+                        {%- endif -%}
+                        {{ block.settings.chip_1 }}
+                      </span>
+                    {%- endif -%}
+                    {%- if block.settings.chip_2 != blank -%}
+                      <span class="zsempiri-trust-chip">
+                        {%- if block.settings.icon_2 != blank -%}
+                          <span class="zsempiri-trust-chip__icon" aria-hidden="true">{{ block.settings.icon_2 }}</span>
+                        {%- endif -%}
+                        {{ block.settings.chip_2 }}
+                      </span>
+                    {%- endif -%}
+                    {%- if block.settings.chip_3 != blank -%}
+                      <span class="zsempiri-trust-chip">
+                        {%- if block.settings.icon_3 != blank -%}
+                          <span class="zsempiri-trust-chip__icon" aria-hidden="true">{{ block.settings.icon_3 }}</span>
+                        {%- endif -%}
+                        {{ block.settings.chip_3 }}
+                      </span>
+                    {%- endif -%}
+                    {%- if block.settings.chip_4 != blank -%}
+                      <span class="zsempiri-trust-chip">
+                        {%- if block.settings.icon_4 != blank -%}
+                          <span class="zsempiri-trust-chip__icon" aria-hidden="true">{{ block.settings.icon_4 }}</span>
+                        {%- endif -%}
+                        {{ block.settings.chip_4 }}
+                      </span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -2084,6 +2137,65 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        }
+      ]
+    },
+    {
+      "type": "zsempiri_trust_badges",
+      "name": "Zsempiri — Trust chipek",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Kis chipek a vásárlási gombok alatt (pl. szállítás, garancia, egyedi)"
+        },
+        {
+          "type": "text",
+          "id": "icon_1",
+          "label": "Chip 1 — Ikon/emoji",
+          "default": "🚚"
+        },
+        {
+          "type": "text",
+          "id": "chip_1",
+          "label": "Chip 1 — Szöveg",
+          "default": "Gyors szállítás"
+        },
+        {
+          "type": "text",
+          "id": "icon_2",
+          "label": "Chip 2 — Ikon/emoji",
+          "default": "✍️"
+        },
+        {
+          "type": "text",
+          "id": "chip_2",
+          "label": "Chip 2 — Szöveg",
+          "default": "Egyedi gravírozás"
+        },
+        {
+          "type": "text",
+          "id": "icon_3",
+          "label": "Chip 3 — Ikon/emoji",
+          "default": "🪵"
+        },
+        {
+          "type": "text",
+          "id": "chip_3",
+          "label": "Chip 3 — Szöveg",
+          "default": "Tömör nyírfa"
+        },
+        {
+          "type": "text",
+          "id": "icon_4",
+          "label": "Chip 4 — Ikon/emoji",
+          "default": "🎁"
+        },
+        {
+          "type": "text",
+          "id": "chip_4",
+          "label": "Chip 4 — Szöveg",
+          "default": "Ajándékra kész"
         }
       ]
     }

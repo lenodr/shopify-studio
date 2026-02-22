@@ -1,0 +1,242 @@
+{{ 'zsempiri-homepage.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign spotlight_product = section.settings.product
+  assign end_date = section.settings.countdown_end | default: '2025-12-31T23:59:00'
+  assign badge_text = section.settings.badge_text | default: 'Akció'
+  assign show_countdown = section.settings.show_countdown
+  assign bg = section.settings.bg_color | default: '#f3ecdc'
+-%}
+
+{%- if spotlight_product != blank -%}
+  {%- assign product = spotlight_product -%}
+  {%- assign variant = product.selected_or_first_available_variant -%}
+  {%- assign product_image = product.featured_image -%}
+
+  <div
+    class="zsempiri-spotlight"
+    style="background-color: {{ bg }};"
+  >
+    <div class="zsempiri-spotlight__inner">
+
+      {%- comment -%} Bal oldal: Kép {%- endcomment -%}
+      <div class="zsempiri-spotlight__media">
+        {%- if product_image != blank -%}
+          {{
+            product_image
+            | image_url: width: 800
+            | image_tag:
+              class: '',
+              alt: product.title,
+              loading: 'lazy',
+              widths: '400, 600, 800',
+              sizes: '(min-width: 750px) 50vw, 100vw'
+          }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Jobb oldal: Infó {%- endcomment -%}
+      <div class="zsempiri-spotlight__info">
+
+        {%- comment -%} Badge {%- endcomment -%}
+        {%- if badge_text != blank -%}
+          <span class="zsempiri-spotlight__badge">{{ badge_text }}</span>
+        {%- endif -%}
+
+        {%- comment -%} Countdown timer {%- endcomment -%}
+        {%- if show_countdown -%}
+          <zsempiri-countdown
+            class="zsempiri-countdown"
+            data-end="{{ end_date }}"
+          >
+            <div class="zsempiri-countdown__chip">
+              <span class="zsempiri-countdown__number" data-days>00</span>
+              <span class="zsempiri-countdown__label">Nap</span>
+            </div>
+            <div class="zsempiri-countdown__chip">
+              <span class="zsempiri-countdown__number" data-hours>00</span>
+              <span class="zsempiri-countdown__label">Óra</span>
+            </div>
+            <div class="zsempiri-countdown__chip">
+              <span class="zsempiri-countdown__number" data-minutes>00</span>
+              <span class="zsempiri-countdown__label">Perc</span>
+            </div>
+            <div class="zsempiri-countdown__chip">
+              <span class="zsempiri-countdown__number" data-seconds>00</span>
+              <span class="zsempiri-countdown__label">Másodperc</span>
+            </div>
+          </zsempiri-countdown>
+
+          <script>
+            if (!customElements.get('zsempiri-countdown')) {
+              class ZsempiriCountdown extends HTMLElement {
+                connectedCallback() {
+                  this._end = new Date(this.dataset.end);
+                  this._days    = this.querySelector('[data-days]');
+                  this._hours   = this.querySelector('[data-hours]');
+                  this._minutes = this.querySelector('[data-minutes]');
+                  this._seconds = this.querySelector('[data-seconds]');
+                  this._update();
+                  this._interval = setInterval(() => this._update(), 1000);
+                }
+
+                _pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
+
+                _update() {
+                  const diff = this._end - Date.now();
+                  if (diff <= 0) {
+                    clearInterval(this._interval);
+                    this.style.display = 'none';
+                    return;
+                  }
+                  const d = Math.floor(diff / 86400000);
+                  const h = Math.floor((diff % 86400000) / 3600000);
+                  const m = Math.floor((diff % 3600000) / 60000);
+                  const s = Math.floor((diff % 60000) / 1000);
+                  this._days.textContent    = this._pad(d);
+                  this._hours.textContent   = this._pad(h);
+                  this._minutes.textContent = this._pad(m);
+                  this._seconds.textContent = this._pad(s);
+                }
+
+                disconnectedCallback() { clearInterval(this._interval); }
+              }
+              customElements.define('zsempiri-countdown', ZsempiriCountdown);
+            }
+          </script>
+        {%- endif -%}
+
+        {%- comment -%} Termék cím {%- endcomment -%}
+        <h2 class="zsempiri-spotlight__title">
+          <a href="{{ product.url }}" style="text-decoration:none; color:inherit;">
+            {{ product.title }}
+          </a>
+        </h2>
+
+        {%- comment -%} Ár {%- endcomment -%}
+        <div class="zsempiri-spotlight__price">
+          {%- if variant.compare_at_price > variant.price -%}
+            <span class="zsempiri-spotlight__price-sale">
+              {{ variant.price | money }}
+            </span>
+            <span class="zsempiri-spotlight__price-regular">
+              {{ variant.compare_at_price | money }}
+            </span>
+          {%- else -%}
+            <span class="zsempiri-spotlight__price-only">
+              {{ variant.price | money }}
+            </span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Rövid leírás {%- endcomment -%}
+        {%- if section.settings.description != blank -%}
+          <p class="zsempiri-spotlight__desc">{{ section.settings.description }}</p>
+        {%- elsif product.description != blank -%}
+          <p class="zsempiri-spotlight__desc">
+            {{ product.description | strip_html | truncate: 200 }}
+          </p>
+        {%- endif -%}
+
+        {%- comment -%} Gombok {%- endcomment -%}
+        <div class="zsempiri-spotlight__buttons">
+          {%- if product.variants.size == 1 -%}
+            {%- form 'product', product, id: 'SpotlightForm-{{ section.id }}' -%}
+              <input type="hidden" name="id" value="{{ variant.id }}">
+              <button
+                type="submit"
+                name="add"
+                class="zsempiri-spotlight__cta zsempiri-spotlight__cta--primary"
+                {%- if variant.available == false %} disabled{%- endif -%}
+              >
+                {%- if variant.available -%}
+                  🛒 Kosárba teszem
+                {%- else -%}
+                  Elfogyott
+                {%- endif -%}
+              </button>
+            {%- endform -%}
+          {%- else -%}
+            <a
+              href="{{ product.url }}"
+              class="zsempiri-spotlight__cta zsempiri-spotlight__cta--primary"
+            >
+              🛒 Megnézem a terméket
+            </a>
+          {%- endif -%}
+
+          <a
+            href="{{ product.url }}"
+            class="zsempiri-spotlight__cta zsempiri-spotlight__cta--secondary"
+          >
+            Részletek megtekintése →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{%- else -%}
+
+  {%- if request.design_mode -%}
+    <div style="padding: 4rem 2rem; text-align: center; background: #f3ecdc; color: #7b512f;">
+      <p style="font-family: 'Grandstander', cursive; font-size: 2rem; margin: 0 0 1rem;">Zsempiri — Spotlight</p>
+      <p style="font-family: 'Jost', sans-serif;">Válassz ki egy terméket a section beállításaiban!</p>
+    </div>
+  {%- endif -%}
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Zsempiri — Spotlight",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Kiemelt termék"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Visszaszámláló megjelenítése",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "countdown_end",
+      "label": "Visszaszámláló vége",
+      "default": "2025-12-31T23:59:00",
+      "info": "ISO 8601 formátum, pl. 2025-12-31T23:59:00 (helyi idő)"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge szöveg",
+      "default": "🔥 Akció"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Egyéni leírás (opcionális)",
+      "info": "Ha üres, a termék leírásának első 200 karaktere jelenik meg."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Háttérszín",
+      "default": "#f3ecdc"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zsempiri — Spotlight"
+    }
+  ]
+}
+{% endschema %}

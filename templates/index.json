@@ -57,6 +57,53 @@
         "show_text_below": false
       }
     },
+    "zsempiri_tiles": {
+      "type": "zsempiri-category-tiles",
+      "blocks": {
+        "tile1": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Kesz_husveti_kosar_celofanba_csomagolva_szalaggal_keszre_csomagolt_ajandek.jpg",
+            "label": "Ajándékok",
+            "link": "/collections/ajandekoknak"
+          }
+        },
+        "tile2": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/fali-disz-nevre-szolo-gyerekszoba.jpg",
+            "label": "Gyerekvilág",
+            "link": "/collections/gyerekeknek"
+          }
+        },
+        "tile3": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/hero.jpg",
+            "label": "Otthon",
+            "link": "/collections/otthonra"
+          }
+        },
+        "tile4": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/matrica-iv.jpg",
+            "label": "Kiegészítők",
+            "link": "/collections/kiegeszitok"
+          }
+        }
+      },
+      "block_order": [
+        "tile1",
+        "tile2",
+        "tile3",
+        "tile4"
+      ],
+      "settings": {
+        "heading": "",
+        "color_scheme": "scheme-1"
+      }
+    },
     "zsempiri_marquee": {
       "type": "zsempiri-marquee",
       "blocks": {
@@ -118,51 +165,52 @@
         "padding_vertical": 10
       }
     },
-    "zsempiri_tiles": {
-      "type": "zsempiri-category-tiles",
+    "zsempiri_features": {
+      "type": "zsempiri-features",
       "blocks": {
-        "tile1": {
-          "type": "tile",
+        "feat1": {
+          "type": "feature",
           "settings": {
-            "image": "shopify://shop_images/Kesz_husveti_kosar_celofanba_csomagolva_szalaggal_keszre_csomagolt_ajandek.jpg",
-            "label": "Ajándékok",
-            "link": "/collections/ajandekoknak"
+            "icon": "🚚",
+            "title": "Ingyenes szállítás",
+            "text": "110 € feletti rendelésnél"
           }
         },
-        "tile2": {
-          "type": "tile",
+        "feat2": {
+          "type": "feature",
           "settings": {
-            "image": "shopify://shop_images/fali-disz-nevre-szolo-gyerekszoba.jpg",
-            "label": "Gyerekvilág",
-            "link": "/collections/gyerekeknek"
+            "icon": "🔄",
+            "title": "Pénzvisszafizetés",
+            "text": "30 napos cseregarancia"
           }
         },
-        "tile3": {
-          "type": "tile",
+        "feat3": {
+          "type": "feature",
           "settings": {
-            "image": "shopify://shop_images/hero.jpg",
-            "label": "Otthon",
-            "link": "/collections/otthonra"
+            "icon": "💬",
+            "title": "Online support",
+            "text": "Hétköznap 9–17 között"
           }
         },
-        "tile4": {
-          "type": "tile",
+        "feat4": {
+          "type": "feature",
           "settings": {
-            "image": "shopify://shop_images/matrica-iv.jpg",
-            "label": "Kiegészítők",
-            "link": "/collections/kiegeszitok"
+            "icon": "💳",
+            "title": "Rugalmas fizetés",
+            "text": "Több fizetési mód elérhető"
           }
         }
       },
       "block_order": [
-        "tile1",
-        "tile2",
-        "tile3",
-        "tile4"
+        "feat1",
+        "feat2",
+        "feat3",
+        "feat4"
       ],
       "settings": {
-        "heading": "Böngéssz kategória szerint",
-        "color_scheme": "scheme-1"
+        "bg_color": "#faf9f6",
+        "show_wave_divider": true,
+        "wave_color": "#f3ecdc"
       }
     },
     "featured_collection": {
@@ -192,12 +240,35 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
+    },
+    "zsempiri_spotlight": {
+      "type": "zsempiri-product-spotlight",
+      "settings": {
+        "product": "picurkalandok-tepozaras-foglalkoztato-konyv-emberek",
+        "show_countdown": true,
+        "countdown_end": "2026-04-19T23:59:00",
+        "badge_text": "🔥 Akció",
+        "description": "",
+        "bg_color": "#faf9f6"
+      }
+    },
+    "zsempiri_features_eL48ft": {
+      "type": "zsempiri-features",
+      "name": "Zsempiri — Features",
+      "settings": {
+        "bg_color": "#FAF9F6",
+        "show_wave_divider": true,
+        "wave_color": "#f3ecdc"
+      }
     }
   },
   "order": [
     "image_banner",
-    "zsempiri_marquee",
     "zsempiri_tiles",
-    "featured_collection"
+    "zsempiri_marquee",
+    "zsempiri_features",
+    "featured_collection",
+    "zsempiri_spotlight",
+    "zsempiri_features_eL48ft"
   ]
 }

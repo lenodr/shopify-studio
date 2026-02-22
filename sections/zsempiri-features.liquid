@@ -1,0 +1,136 @@
+{{ 'zsempiri-homepage.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg = section.settings.bg_color | default: '#FAF9F6'
+  assign show_wave = section.settings.show_wave_divider
+  assign wave_color = section.settings.wave_color | default: '#f3ecdc'
+-%}
+
+<div
+  class="zsempiri-features"
+  style="background-color: {{ bg }};"
+>
+  <div class="zsempiri-features__inner">
+    <div class="zsempiri-features__grid">
+      {%- for block in section.blocks -%}
+        <div class="zsempiri-feature-card" {{ block.shopify_attributes }}>
+          <div class="zsempiri-feature-card__content">
+            <p class="zsempiri-feature-card__title">{{ block.settings.title }}</p>
+            {%- if block.settings.text != blank -%}
+              <p class="zsempiri-feature-card__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.icon != blank -%}
+            <div class="zsempiri-feature-card__icon" aria-hidden="true">{{ block.settings.icon }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if show_wave -%}
+    <div class="zsempiri-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path
+          d="M0,30 C120,55 240,5 360,30 C480,55 600,5 720,30 C840,55 960,5 1080,30 C1200,55 1320,5 1440,30 L1440,60 L0,60 Z"
+          fill="{{ wave_color }}"
+        />
+      </svg>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Zsempiri — Features",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Háttérszín",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wave_divider",
+      "label": "Hullámos elválasztó alul",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "wave_color",
+      "label": "Hullám színe (következő szekció háttere)",
+      "default": "#f3ecdc",
+      "info": "Állítsd be a hullám alatti szekció háttérszínét"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Kártya",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Ikon / emoji",
+          "default": "🚚"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Cím",
+          "default": "Gyors szállítás"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Leírás",
+          "default": "110 € feletti rendelésnél ingyenes"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zsempiri — Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🚚",
+            "title": "Ingyenes szállítás",
+            "text": "110 € feletti rendelésnél"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🔄",
+            "title": "Pénzvisszafizetés",
+            "text": "30 napos cseregarancia"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "💬",
+            "title": "Online support",
+            "text": "Hétköznap 9–17 között"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "💳",
+            "title": "Rugalmas fizetés",
+            "text": "Több fizetési mód elérhető"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

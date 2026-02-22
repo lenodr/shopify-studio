@@ -118,6 +118,18 @@ body::before {
 
 .shopify-section-header {
   background: transparent !important;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Lefele görgetésnél JS adja hozzá ezt az osztályt */
+.shopify-section-header.zsempiri-header--hidden {
+  transform: translateY(-130%);
+}
+
+/* A sticky header is alkalmazza a transition-t */
+.shopify-section-header-sticky {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-wrapper {
