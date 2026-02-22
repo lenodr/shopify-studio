@@ -6,54 +6,66 @@
 
 /* ============================================================
    1. HERO (image-banner section)
-   Meleg gradient overlay balra + úszó bento szöveges kártya
+   Szöveg közvetlenül a hero képen — NEM szövegdobozban.
+   show_text_box: false az index.json-ban.
    ============================================================ */
 
-/* Warm gradient overlay (bal→jobb fade) */
+/* Sötétebb gradient overlay — szöveg olvashatóságáért */
 .banner::after {
   background: linear-gradient(
     105deg,
-    rgba(243, 236, 220, 0.75) 0%,
-    rgba(243, 236, 220, 0.40) 40%,
-    transparent 65%
+    rgba(30, 15, 5, 0.55) 0%,
+    rgba(30, 15, 5, 0.25) 55%,
+    transparent 80%
   ) !important;
   opacity: 1 !important;
 }
 
-/* Floating bento szöveges kártya */
+/* Szöveg konténer: NO háttér (show_text_box: false esetén üres,
+   de ha valaki bekapcsolja, ne legyen kártyás) */
 .banner .content-container {
-  background-color: rgba(250, 249, 246, 0.93) !important;
-  border-radius: 2.4rem !important;
-  padding: 2.8rem 3.2rem !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(212, 187, 155, 0.4);
-  box-shadow: 0 8px 32px rgba(123, 81, 47, 0.10);
-  max-width: 52rem;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 3.2rem !important;
+  max-width: 60rem;
 }
 
+/* Hero heading: FEHÉR, nagy, olvasható a képen */
 .banner h1,
 .banner .h1,
-.banner .banner__heading {
+.banner .banner__heading,
+.banner .h0 {
   font-family: 'Grandstander', cursive !important;
-  color: var(--zsempiri-wood) !important;
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  line-height: 1.15;
+  color: #ffffff !important;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.40);
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  line-height: 1.1;
 }
 
+/* Hero body szöveg: fehér/áttetsző */
 .banner p,
-.banner .banner__text {
-  color: rgba(123, 81, 47, 0.82) !important;
+.banner .banner__text,
+.banner .rte p {
+  color: rgba(255, 255, 255, 0.88) !important;
   font-family: 'Jost', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 1.65;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.30);
 }
 
+/* Hero gomb: sage, lekerekített */
+.banner .button,
 .banner .button--primary {
   background-color: var(--zsempiri-sage) !important;
   color: #ffffff !important;
   border-radius: 4rem !important;
   border: none !important;
+  font-family: 'Grandstander', cursive !important;
+  font-weight: 700 !important;
+  backdrop-filter: none !important;
 }
 
 /* Hero section: nincs felső margin (pill header ráfekszik) */
@@ -304,19 +316,21 @@
 
 /* ============================================================
    6. HERO → CATEGORY TILES OVERLAP
-   A tiles section belelóg a hero képbe (Tinki stílus)
+   A tiles section belelóg a hero KÉPBE (Tinki stílus)
+   FONTOS: padding-bottom NÉLKÜL a hero sectionön —
+   a negatív margin így a tényleges hero KÉPRE húzza fel a tiles-t.
    ============================================================ */
 
-/* Hero section: elég tér az alján az átfedéshez */
+/* Hero section: csak z-index és stacking context */
 .shopify-section:has(.banner) {
   position: relative;
   z-index: 1;
-  padding-bottom: 8rem;
+  /* NINCS padding-bottom — a tiles a valódi hero képre lóg rá */
 }
 
-/* Tiles section: felfelé húzódik a hero képre */
+/* Tiles section: 12rem-et húzódik fel a hero képre */
 .shopify-section:has(.zsempiri-tiles) {
-  margin-top: -8rem;
+  margin-top: -12rem;
   position: relative;
   z-index: 3;
 }

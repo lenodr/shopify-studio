@@ -67,21 +67,15 @@ a:not(.button):not([class*="btn"]):hover {
 /* ============================================================
    C. GLOBAL BACKGROUND
    Dawn .gradient { background: rgb(var(--color-background)) }
-   A scheme-1 #f3ecdc-t kap a settings_data.json-ból,
-   tehát ez automatikusan cream lesz. Extra biztosíték:
+   NEM írjuk felül hardcoded !important-tal — ez blokkolná
+   az admin color scheme beállításokat.
+   A háttérszín az admin "Color schemes" → Scheme 1 → Background
+   mezőjéből jön automatikusan Dawn CSS változókon keresztül.
    ============================================================ */
 
-body {
-  background-color: var(--zsempiri-cream) !important;
-}
-
+/* Csak az attachment-et szüntessük meg (parallax shimmer törlése) */
 .gradient {
-  background-color: var(--zsempiri-cream) !important;
   background-attachment: scroll !important;
-}
-
-.color-scheme-1 {
-  background-color: var(--zsempiri-cream) !important;
 }
 
 
