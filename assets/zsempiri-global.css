@@ -11,11 +11,11 @@
    ============================================================ */
 
 :root {
-  --zsempiri-cream:    #f3ecdc;
-  --zsempiri-card-bg:  #FAF9F6;
-  --zsempiri-wood:     #7b512f;
-  --zsempiri-tan:      #c9a882;
-  --zsempiri-sage:     #8F9779;
+  --zsempiri-cream: #f3ecdc;
+  --zsempiri-card-bg: #FAF9F6;
+  --zsempiri-wood: #7b512f;
+  --zsempiri-tan: #c9a882;
+  --zsempiri-sage: #8F9779;
   --zsempiri-accent-1: #d4bb9b;
   --zsempiri-accent-2: #c18763;
   --zsempiri-accent-3: #b2805a;
@@ -34,8 +34,18 @@ body {
   color: var(--zsempiri-wood);
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-family: 'Grandstander', 'Georgia', cursive !important;
   color: var(--zsempiri-wood);
 }
@@ -98,10 +108,14 @@ body::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body::before { opacity: 0.02; }
+  body::before {
+    opacity: 0.02;
+  }
 }
 
-.shopify-design-mode body::before { opacity: 0.02; }
+.shopify-design-mode body::before {
+  opacity: 0.02;
+}
 
 
 /* ============================================================
@@ -125,7 +139,7 @@ body::before {
   border: 1px solid rgba(212, 187, 155, 0.45) !important;
   box-shadow: 0 4px 24px rgba(123, 81, 47, 0.10) !important;
   transition: background-color 0.35s ease, box-shadow 0.35s ease,
-              border-color 0.35s ease, backdrop-filter 0.35s ease;
+    border-color 0.35s ease, backdrop-filter 0.35s ease;
 }
 
 /* Sötétbarna pill sticky állapotban (mint a marquee háttere) */
@@ -135,6 +149,10 @@ body::before {
   -webkit-backdrop-filter: none !important;
   border-color: rgba(212, 187, 155, 0.20) !important;
   box-shadow: 0 6px 32px rgba(30, 15, 5, 0.30) !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* Cream nav szöveg + ikonok sticky állapotban */
@@ -144,6 +162,7 @@ body::before {
 .shopify-section-header-sticky .header__menu-item a {
   color: var(--zsempiri-cream) !important;
 }
+
 .shopify-section-header-sticky .header__icon svg,
 .shopify-section-header-sticky .header__icon .icon {
   color: var(--zsempiri-cream) !important;
@@ -224,6 +243,7 @@ body.template-index .utility-bar .announcement-bar {
   background-attachment: unset !important;
   border-color: transparent !important;
 }
+
 body.template-index .utility-bar .announcement-bar__message,
 body.template-index .utility-bar .announcement-bar__message p,
 body.template-index .utility-bar .announcement-bar__message a {
@@ -237,6 +257,7 @@ body.template-index .section-header:not(.scrolled-past-header) .header__menu-ite
 body.template-index .section-header:not(.scrolled-past-header) .header__menu-item a {
   color: rgba(255, 255, 255, 0.92) !important;
 }
+
 body.template-index .section-header:not(.scrolled-past-header) .header__icon svg,
 body.template-index .section-header:not(.scrolled-past-header) .header__icon .icon {
   color: rgba(255, 255, 255, 0.92) !important;
@@ -246,6 +267,11 @@ body.template-index .section-header:not(.scrolled-past-header) .header__icon .ic
   .header-wrapper {
     margin: 0.8rem 1rem 0 !important;
     border-radius: 2rem !important;
+  }
+
+  .shopify-section-header-sticky .header-wrapper {
+    margin: 0 !important;
+    border-radius: 0 !important;
   }
 }
 
@@ -392,7 +418,7 @@ textarea:focus,
    I. VARIANT PILL-EK
    ============================================================ */
 
-.swatch-input__input + label,
+.swatch-input__input+label,
 .product-form__input--pill label {
   border-color: var(--zsempiri-accent-1);
   color: var(--zsempiri-wood);
@@ -401,8 +427,8 @@ textarea:focus,
   transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
-.swatch-input__input:checked + label,
-.product-form__input--pill input:checked + label {
+.swatch-input__input:checked+label,
+.product-form__input--pill input:checked+label {
   border-color: var(--zsempiri-sage) !important;
   background-color: var(--zsempiri-sage) !important;
   color: #ffffff !important;
@@ -564,14 +590,24 @@ textarea:focus,
   border-radius: 0.4rem;
 }
 
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--zsempiri-cream); }
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--zsempiri-cream);
+}
+
 ::-webkit-scrollbar-thumb {
   background-color: var(--zsempiri-accent-1);
   border-radius: 4px;
   border: 2px solid var(--zsempiri-cream);
 }
-::-webkit-scrollbar-thumb:hover { background-color: var(--zsempiri-accent-2); }
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--zsempiri-accent-2);
+}
 
 .loading__spinner .path,
 .loading-overlay__spinner .path {
