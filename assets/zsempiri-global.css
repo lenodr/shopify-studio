@@ -200,14 +200,18 @@ body.template-index .section-header:not(.scrolled-past-header) .header-wrapper {
 }
 
 /* 3. Announcement bar (utility-bar) átlátszó a hero felett.
-      A .utility-bar NEM a .section-header-en belül van — body :has()-sal célozzuk. */
-body.template-index:has(.section-header:not(.scrolled-past-header)) .utility-bar {
+      A utility-bar a főoldalon csak az oldal tetején látható — görgetés után
+      a sticky header mögé csúszik, tehát feltétel nélkül átlátszóvá tehetjük. */
+body.template-index .utility-bar,
+body.template-index .utility-bar .announcement-bar {
+  background: transparent !important;
   background-color: transparent !important;
+  background-attachment: unset !important;
   border-color: transparent !important;
 }
-body.template-index:has(.section-header:not(.scrolled-past-header)) .announcement-bar__message,
-body.template-index:has(.section-header:not(.scrolled-past-header)) .announcement-bar__message p,
-body.template-index:has(.section-header:not(.scrolled-past-header)) .announcement-bar__message a {
+body.template-index .utility-bar .announcement-bar__message,
+body.template-index .utility-bar .announcement-bar__message p,
+body.template-index .utility-bar .announcement-bar__message a {
   color: rgba(255, 255, 255, 0.80) !important;
 }
 
