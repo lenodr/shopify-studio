@@ -128,10 +128,25 @@ body::before {
               border-color 0.35s ease, backdrop-filter 0.35s ease;
 }
 
-/* Tömörebb glassmorphism görgetés közben */
+/* Sötétbarna pill sticky állapotban (mint a marquee háttere) */
 .shopify-section-header-sticky .header-wrapper {
-  background-color: rgba(243, 236, 220, 0.97) !important;
-  box-shadow: 0 6px 32px rgba(123, 81, 47, 0.16) !important;
+  background-color: var(--zsempiri-wood) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-color: rgba(212, 187, 155, 0.20) !important;
+  box-shadow: 0 6px 32px rgba(30, 15, 5, 0.30) !important;
+}
+
+/* Cream nav szöveg + ikonok sticky állapotban */
+.shopify-section-header-sticky .header__heading-link,
+.shopify-section-header-sticky .list-menu__item--link,
+.shopify-section-header-sticky .header__menu-item span,
+.shopify-section-header-sticky .header__menu-item a {
+  color: var(--zsempiri-cream) !important;
+}
+.shopify-section-header-sticky .header__icon svg,
+.shopify-section-header-sticky .header__icon .icon {
+  color: var(--zsempiri-cream) !important;
 }
 
 /* Header mindig a tartalom felett (tile kártyák z-index: 3).
