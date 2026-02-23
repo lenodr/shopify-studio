@@ -106,26 +106,16 @@ body::before {
 
 /* ============================================================
    E. FLOATING PILL HEADER
-   Dawn header struktúra:
-   .shopify-section-header > .header-wrapper > .header
+   Dawn sticky-header custom element kezeli a show/hide logikát
+   (sticky_header_type: "on-scroll-up").
+   Dawn által használt osztályok a .section-header elemen:
+     .scrolled-past-header  — görgetés megkezdése után
+     .shopify-section-header-sticky — sticky pozícióban
+     .shopify-section-header-hidden — elrejtve (le görgetésnél)
+     .animate                — transition engedélyezve
    ============================================================ */
 
-.shopify-section-header {
-  background: transparent !important;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
-/* Lefele görgetésnél JS adja hozzá ezt az osztályt */
-.shopify-section-header.zsempiri-header--hidden {
-  transform: translateY(-130%);
-}
-
-/* A sticky header is alkalmazza a transition-t */
-.shopify-section-header-sticky {
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+/* ─── Pill wrapper: minden oldal, görgetés után ─────────────── */
 .header-wrapper {
   margin: 1.2rem 1.6rem 0 !important;
   border-radius: 10rem !important;
@@ -134,13 +124,21 @@ body::before {
   -webkit-backdrop-filter: blur(14px) !important;
   border: 1px solid rgba(212, 187, 155, 0.45) !important;
   box-shadow: 0 4px 24px rgba(123, 81, 47, 0.10) !important;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.35s ease, box-shadow 0.35s ease,
+              border-color 0.35s ease, backdrop-filter 0.35s ease;
 }
 
-/* Scrollnál: tömörebb glassmorphism */
+/* Tömörebb glassmorphism görgetés közben */
 .shopify-section-header-sticky .header-wrapper {
   background-color: rgba(243, 236, 220, 0.97) !important;
   box-shadow: 0 6px 32px rgba(123, 81, 47, 0.16) !important;
+}
+
+/* Header mindig a tartalom felett (tile kártyák z-index: 3).
+   Dawn base.css: .section-header.shopify-section-group-header-group { z-index: 3 }
+   → egyenlő a tile-okkal, DOM sorrendben MainContent nyer. Override: */
+.section-header.shopify-section-group-header-group {
+  z-index: 100 !important;
 }
 
 .header {
@@ -148,7 +146,7 @@ body::before {
   padding-bottom: 0.8rem !important;
 }
 
-/* Nav linkek */
+/* Nav linkek (alap: wood) */
 .header__heading-link,
 .list-menu__item--link,
 .header__menu-item span,
@@ -165,18 +163,64 @@ body::before {
   opacity: 1 !important;
 }
 
-/* Header ikonok (search, cart, account) */
 .header__icon svg,
 .header__icon .icon {
   color: var(--zsempiri-wood);
 }
 
-/* Kosár db buborék — sage zöld */
 .cart-count-bubble {
   background-color: var(--zsempiri-sage) !important;
   color: #ffffff !important;
   font-family: 'Jost', sans-serif;
   font-weight: 700;
+}
+
+/* ─── FŐOLDAL: Átlátszó fejléc a hero képen ────────────────── */
+
+/* Announcement bar magassága JS-sel kerül beállításra (theme.liquid).
+   Header magassága Dawn StickyHeader JS-sel (--header-height).
+   Mindkettő kellhet az overlap kiszámításához. */
+:root {
+  --announcement-bar-height: 0px;
+}
+
+/* 1. Hero a lap tetejéig ér: a #MainContent felhúzva
+      a header + announcement bar együttes magasságával. */
+body.template-index #MainContent {
+  margin-top: calc(-1 * (var(--header-height, 80px) + var(--announcement-bar-height, 0px)));
+}
+
+/* 2. Átlátszó pill a hero felett */
+body.template-index .section-header:not(.scrolled-past-header) .header-wrapper {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 3. Announcement bar (utility-bar) átlátszó a hero felett.
+      A .utility-bar NEM a .section-header-en belül van — body :has()-sal célozzuk. */
+body.template-index:has(.section-header:not(.scrolled-past-header)) .utility-bar {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+body.template-index:has(.section-header:not(.scrolled-past-header)) .announcement-bar__message,
+body.template-index:has(.section-header:not(.scrolled-past-header)) .announcement-bar__message p,
+body.template-index:has(.section-header:not(.scrolled-past-header)) .announcement-bar__message a {
+  color: rgba(255, 255, 255, 0.80) !important;
+}
+
+/* 5. Fehér nav szöveg + ikonok a hero képen */
+body.template-index .section-header:not(.scrolled-past-header) .header__heading-link,
+body.template-index .section-header:not(.scrolled-past-header) .list-menu__item--link,
+body.template-index .section-header:not(.scrolled-past-header) .header__menu-item span,
+body.template-index .section-header:not(.scrolled-past-header) .header__menu-item a {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+body.template-index .section-header:not(.scrolled-past-header) .header__icon svg,
+body.template-index .section-header:not(.scrolled-past-header) .header__icon .icon {
+  color: rgba(255, 255, 255, 0.92) !important;
 }
 
 @media screen and (max-width: 749px) {

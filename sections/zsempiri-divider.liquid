@@ -1,0 +1,163 @@
+{%- liquid
+  assign wave_style    = section.settings.wave_style
+  assign fill_color    = section.settings.fill_color
+  assign bg_color      = section.settings.bg_color
+  assign height        = section.settings.height
+  assign flip          = section.settings.flip
+  assign margin_top    = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+-%}
+
+<style>
+  #zsempiri-divider-{{ section.id }} {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    background-color: {{ bg_color }};
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+  }
+  #zsempiri-divider-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: {{ height }}px;
+    {% if flip %}transform: scaleY(-1);{% endif %}
+  }
+  /* Eltávolítja a Dawn section-spacing-t */
+  #shopify-section-{{ section.id }} {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin: 0 !important;
+  }
+</style>
+
+<div id="zsempiri-divider-{{ section.id }}" aria-hidden="true">
+  {%- case wave_style -%}
+
+    {%- when 'hills-1' -%}
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,30 C120,55 240,5 360,30 C480,55 600,5 720,30 C840,55 960,5 1080,30 C1200,55 1320,5 1440,30 L1440,60 L0,60 Z" fill="{{ fill_color }}"/>
+      </svg>
+
+    {%- when 'hills-2' -%}
+      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,20 1440,40 L1440,80 L0,80 Z" fill="{{ fill_color }}"/>
+      </svg>
+
+    {%- when 'waves' -%}
+      <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,25 C60,40 90,10 150,25 C210,40 240,10 300,25 C360,40 390,10 450,25 C510,40 540,10 600,25 C660,40 690,10 750,25 C810,40 840,10 900,25 C960,40 990,10 1050,25 C1110,40 1140,10 1200,25 C1260,40 1320,10 1440,25 L1440,50 L0,50 Z" fill="{{ fill_color }}"/>
+      </svg>
+
+    {%- when 'triangle' -%}
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,0 L720,60 L1440,0 L1440,60 L0,60 Z" fill="{{ fill_color }}"/>
+      </svg>
+
+    {%- when 'tilt' -%}
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,60 L1440,0 L1440,60 L0,60 Z" fill="{{ fill_color }}"/>
+      </svg>
+
+    {%- when 'tilt-reverse' -%}
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,0 L1440,60 L1440,60 L0,60 Z" fill="{{ fill_color }}"/>
+      </svg>
+
+    {%- else -%}
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,30 C120,55 240,5 360,30 C480,55 600,5 720,30 C840,55 960,5 1080,30 C1200,55 1320,5 1440,30 L1440,60 L0,60 Z" fill="{{ fill_color }}"/>
+      </svg>
+
+  {%- endcase -%}
+</div>
+
+{% schema %}
+{
+  "name": "Zsempiri — Divider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "wave_style",
+      "label": "Stílus",
+      "options": [
+        { "value": "hills-1",      "label": "Domb (lassú)" },
+        { "value": "hills-2",      "label": "Domb (gyors)" },
+        { "value": "waves",        "label": "Hullámok (sűrű)" },
+        { "value": "triangle",     "label": "Háromszög" },
+        { "value": "tilt",         "label": "Dőlt bal→jobb" },
+        { "value": "tilt-reverse", "label": "Dőlt jobb→bal" }
+      ],
+      "default": "hills-1"
+    },
+    {
+      "type": "color",
+      "id": "fill_color",
+      "label": "Elválasztó kitöltő színe",
+      "info": "Általában a következő szekció háttérszíne.",
+      "default": "#f3ecdc"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Háttérszín",
+      "info": "Az elválasztó mögötti szín (az előző szekció háttérszíne).",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Magasság",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "checkbox",
+      "id": "flip",
+      "label": "Megfordítás (felfelé mutat)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Felső margó",
+      "min": -40,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "info": "Negatív értékkel az előző szekció alá húzható."
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Alsó margó",
+      "min": -40,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zsempiri — Divider",
+      "settings": {
+        "wave_style": "hills-1",
+        "fill_color": "#f3ecdc",
+        "bg_color": "#FAF9F6",
+        "height": 60,
+        "flip": false,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,364 @@
+{{ 'zsempiri-homepage.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign hero_image         = section.settings.image
+  assign ov                 = section.settings.overlay_opacity | divided_by: 100.0
+  assign ov_mid             = ov | times: 0.45 | at_most: 0.55
+  assign banner_height      = section.settings.banner_height
+  assign banner_height_mob  = section.settings.banner_height_mobile
+  assign heading            = section.settings.heading
+  assign heading_size       = section.settings.heading_size
+  assign description        = section.settings.description
+  assign btn_label          = section.settings.button_label
+  assign btn_link           = section.settings.button_link
+  assign btn2_label         = section.settings.button_label_2
+  assign btn2_link          = section.settings.button_link_2
+  assign content_pos        = section.settings.content_position
+  assign columns_desktop    = section.settings.columns_desktop
+  assign columns_mobile     = section.settings.columns_mobile
+  assign overlap            = section.settings.overlap
+
+  case content_pos
+    when 'center'
+      assign justify = 'center'
+      assign text_align = 'center'
+    when 'right'
+      assign justify = 'flex-end'
+      assign text_align = 'right'
+    else
+      assign justify = 'flex-start'
+      assign text_align = 'left'
+  endcase
+-%}
+
+<style>
+  #zsempiri-hc-{{ section.id }} .zsempiri-hc__banner {
+    min-height: {{ banner_height }}rem;
+    justify-content: {{ justify }};
+    text-align: {{ text_align }};
+  }
+  #zsempiri-hc-{{ section.id }} .zsempiri-hc__overlay {
+    background: linear-gradient(
+      105deg,
+      rgba(30, 15, 5, {{ ov }}) 0%,
+      rgba(30, 15, 5, {{ ov_mid }}) 55%,
+      transparent 80%
+    );
+  }
+  #zsempiri-hc-{{ section.id }} .zsempiri-tiles__grid {
+    grid-template-columns: repeat({{ columns_desktop }}, 1fr);
+  }
+  #zsempiri-hc-{{ section.id }} .zsempiri-hc__tiles {
+    margin-top: -{{ overlap }}rem;
+  }
+  @media screen and (max-width: 749px) {
+    #zsempiri-hc-{{ section.id }} .zsempiri-hc__banner {
+      min-height: {{ banner_height_mobile }}rem;
+    }
+    #zsempiri-hc-{{ section.id }} .zsempiri-tiles__grid {
+      grid-template-columns: repeat({{ columns_mobile }}, 1fr);
+    }
+  }
+</style>
+
+<div id="zsempiri-hc-{{ section.id }}" class="zsempiri-hc">
+
+  {%- comment -%} ── Hero banner ──────────────────────────────────── {%- endcomment -%}
+  <div class="zsempiri-hc__banner">
+    <div class="zsempiri-hc__bg" aria-hidden="true">
+      {%- if hero_image != blank -%}
+        {{
+          hero_image
+          | image_url: width: 2400
+          | image_tag:
+            class: 'zsempiri-hc__bg-img',
+            alt: '',
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '750, 1100, 1500, 1780, 2000, 2400',
+            sizes: '100vw'
+        }}
+      {%- endif -%}
+    </div>
+    <div class="zsempiri-hc__overlay" aria-hidden="true"></div>
+
+    <div class="zsempiri-hc__content">
+
+      {%- if heading != blank -%}
+        <{{ section.settings.heading_tag }} class="zsempiri-hc__heading zsempiri-hc__heading--{{ heading_size }}">
+          {{ heading }}
+        </{{ section.settings.heading_tag }}>
+      {%- endif -%}
+
+      {%- if description != blank -%}
+        <p class="zsempiri-hc__desc">{{ description }}</p>
+      {%- endif -%}
+
+      {%- if btn_label != blank -%}
+        <div class="zsempiri-hc__buttons">
+          <a
+            href="{{ btn_link }}"
+            class="button zsempiri-hc__btn"
+            {% if btn_link == blank %}aria-disabled="true"{% endif %}
+          >
+            {{ btn_label }}
+          </a>
+          {%- if btn2_label != blank -%}
+            <a
+              href="{{ btn2_link }}"
+              class="button button--secondary zsempiri-hc__btn"
+            >
+              {{ btn2_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+
+  {%- comment -%} ── Collection tiles (belelóg a hero aljába) ────── {%- endcomment -%}
+  {%- if section.blocks.size > 0 -%}
+    <div class="zsempiri-tiles zsempiri-hc__tiles">
+      <div class="zsempiri-tiles__grid">
+        {%- for block in section.blocks -%}
+          {%- assign tile_image = block.settings.image -%}
+          {%- assign tile_label = block.settings.label -%}
+          {%- assign tile_link  = block.settings.link | default: '#' -%}
+          {%- assign tile_alt   = tile_label | escape -%}
+
+          <a href="{{ tile_link }}" class="zsempiri-tile" {{ block.shopify_attributes }}>
+            <div class="zsempiri-tile__media">
+              {%- if tile_image != blank -%}
+                {{
+                  tile_image
+                  | image_url: width: 800
+                  | image_tag:
+                    class: 'zsempiri-tile__img',
+                    alt: tile_alt,
+                    loading: 'lazy',
+                    widths: '400, 600, 800',
+                    sizes: '(min-width: 750px) 25vw, 50vw'
+                }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg zsempiri-tile__img' }}
+              {%- endif -%}
+            </div>
+            <div class="zsempiri-tile__label">
+              <span class="zsempiri-tile__name">{{ tile_label }}</span>
+            </div>
+          </a>
+
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+</div>
+
+{%- if request.design_mode and section.blocks.size == 0 -%}
+  <div style="padding:3rem 2rem; text-align:center; background:#f3ecdc; color:#7b512f;">
+    <p style="font-family:'Grandstander',cursive; font-size:1.6rem; margin:0;">
+      Adj hozzá gyűjtemény tile-okat a section beállításaiban!
+    </p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Zsempiri — Hero + Tiles",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero kép"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Kép (asztali)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Kép (mobil, opcionális)",
+      "info": "Ha üres, az asztali kép jelenik meg mobilon is."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay sötétség",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "default": 55,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "banner_height",
+      "label": "Banner magassága (asztali)",
+      "min": 30,
+      "max": 100,
+      "step": 2,
+      "default": 70,
+      "unit": "rem"
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "label": "Banner magassága (mobil)",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "default": 50,
+      "unit": "rem"
+    },
+    {
+      "type": "header",
+      "content": "Szöveg"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Főcím",
+      "default": "Kézzelfogható emlék egy digitális világban."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Főcím mérete",
+      "options": [
+        { "value": "h0", "label": "Extra nagy (h0)" },
+        { "value": "h1", "label": "Nagy (h1)" },
+        { "value": "h2", "label": "Közepes (h2)" },
+        { "value": "h3", "label": "Kis (h3)" }
+      ],
+      "default": "h0"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Főcím HTML tag (SEO)",
+      "options": [
+        { "value": "h1", "label": "H1 (főoldal)" },
+        { "value": "h2", "label": "H2" },
+        { "value": "p",  "label": "Paragrafus" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Leírás",
+      "default": "Tömör fa, őszinte munka. Egyedi gravírozással, ajándékra készen."
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Tartalom igazítása",
+      "options": [
+        { "value": "left",   "label": "Bal" },
+        { "value": "center", "label": "Középen" },
+        { "value": "right",  "label": "Jobb" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Gombok"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Gomb szövege",
+      "default": "Valami maradandót keresek!"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Gomb linkje"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "2. gomb szövege (opcionális)"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "2. gomb linkje"
+    },
+    {
+      "type": "header",
+      "content": "Gyűjtemény tile-ok"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Oszlopok (asztali)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Oszlopok (mobil)",
+      "options": [
+        { "value": "1", "label": "1 oszlop" },
+        { "value": "2", "label": "2 oszlop" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "overlap",
+      "label": "Átfedés mélysége (tile-ok a hero aljába lógnak)",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "default": 12,
+      "unit": "rem"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Gyűjtemény tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Kép"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Felirat",
+          "default": "Kategória"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zsempiri — Hero + Tiles",
+      "blocks": [
+        { "type": "tile", "settings": { "label": "Ajándékok" } },
+        { "type": "tile", "settings": { "label": "Gyerekvilág" } },
+        { "type": "tile", "settings": { "label": "Otthon" } },
+        { "type": "tile", "settings": { "label": "Kiegészítők" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

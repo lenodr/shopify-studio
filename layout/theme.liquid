@@ -299,10 +299,9 @@
       }
     </script>
     {{ 'zsempiri-global.css' | asset_url | stylesheet_tag }}
-    <script src="{{ 'zsempiri-scroll-header.js' | asset_url }}" defer="defer"></script>
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient template-{{ template.name }}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -375,6 +374,24 @@
 
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if template == 'index' -%}
+      <script>
+        (function () {
+          var root = document.documentElement;
+          function updateAnnBarHeight() {
+            var bar = document.querySelector('.utility-bar');
+            root.style.setProperty('--announcement-bar-height', bar ? bar.offsetHeight + 'px' : '0px');
+          }
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateAnnBarHeight);
+          } else {
+            updateAnnBarHeight();
+          }
+          window.addEventListener('resize', updateAnnBarHeight);
+        })();
+      </script>
     {%- endif -%}
   </body>
 </html>

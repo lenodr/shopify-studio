@@ -9,56 +9,8 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Kézzelfogható emlék egy digitális világban.",
-            "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Tömör fa, őszinte munka. Egyedi gravírozással, ajándékra készen.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Valami maradandót keresek!",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/b1_9dadf162-4cad-4483-8094-6808ba9ba13a.png",
-        "image_overlay_opacity": 20,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-left",
-        "desktop_content_alignment": "left",
-        "show_text_box": false,
-        "color_scheme": "scheme-1",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
-      }
-    },
-    "zsempiri_tiles": {
-      "type": "zsempiri-category-tiles",
+    "zsempiri_hero_coll": {
+      "type": "zsempiri-hero-collections",
       "blocks": {
         "tile1": {
           "type": "tile",
@@ -100,8 +52,22 @@
         "tile4"
       ],
       "settings": {
-        "heading": "",
-        "color_scheme": "scheme-1"
+        "image": "shopify://shop_images/b1_9dadf162-4cad-4483-8094-6808ba9ba13a.png",
+        "overlay_opacity": 55,
+        "banner_height": 70,
+        "banner_height_mobile": 50,
+        "heading": "Kézzelfogható emlék egy digitális világban.",
+        "heading_size": "h0",
+        "heading_tag": "h1",
+        "description": "Tömör fa, őszinte munka. Egyedi gravírozással, ajándékra készen.",
+        "content_position": "left",
+        "button_label": "Valami maradandót keresek!",
+        "button_link": "shopify://collections/all",
+        "button_label_2": "",
+        "button_link_2": "",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "overlap": 12
       }
     },
     "zsempiri_marquee": {
@@ -209,8 +175,20 @@
       ],
       "settings": {
         "bg_color": "#faf9f6",
-        "show_wave_divider": true,
+        "show_wave_divider": false,
         "wave_color": "#f3ecdc"
+      }
+    },
+    "zsempiri_divider_features": {
+      "type": "zsempiri-divider",
+      "settings": {
+        "wave_style": "hills-1",
+        "fill_color": "#f3ecdc",
+        "bg_color": "#faf9f6",
+        "height": 60,
+        "flip": false,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "featured_collection": {
@@ -257,16 +235,16 @@
       "name": "Zsempiri — Features",
       "settings": {
         "bg_color": "#FAF9F6",
-        "show_wave_divider": true,
+        "show_wave_divider": false,
         "wave_color": "#f3ecdc"
       }
     }
   },
   "order": [
-    "image_banner",
-    "zsempiri_tiles",
+    "zsempiri_hero_coll",
     "zsempiri_marquee",
     "zsempiri_features",
+    "zsempiri_divider_features",
     "featured_collection",
     "zsempiri_spotlight",
     "zsempiri_features_eL48ft"

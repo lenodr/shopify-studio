@@ -202,16 +202,22 @@
   box-shadow: 0 16px 40px rgba(123, 81, 47, 0.22);
 }
 
-.zsempiri-tile__image {
+.zsempiri-tile__media {
   position: absolute;
   inset: 0;
+  overflow: hidden;
+}
+
+.zsempiri-tile__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
   transition: transform 0.5s ease;
 }
 
-.zsempiri-tile:hover .zsempiri-tile__image {
+.zsempiri-tile:hover .zsempiri-tile__img {
   transform: scale(1.06);
 }
 
@@ -321,15 +327,18 @@
    a negatív margin így a tényleges hero KÉPRE húzza fel a tiles-t.
    ============================================================ */
 
-/* Hero section: csak z-index és stacking context */
+/* Hero section: stacking context, header fölé NEM nyúl */
 .shopify-section:has(.banner) {
   position: relative;
   z-index: 1;
   /* NINCS padding-bottom — a tiles a valódi hero képre lóg rá */
+  /* Header z-index:10 > hero z-index:1 → nav szöveg látható a képen */
 }
 
-/* Tiles section: 12rem-et húzódik fel a hero képre */
-.shopify-section:has(.zsempiri-tiles) {
+/* Önálló tiles section (NEM a kombinált hero+tiles section-ben):
+   belelóg az előző szekció aljába.
+   :not(:has(.zsempiri-hc__tiles)) → kizárja a kombinált szekciót. */
+.shopify-section:has(.zsempiri-tiles):not(:has(.zsempiri-hc__tiles)) {
   margin-top: -12rem;
   position: relative;
   z-index: 3;
@@ -684,4 +693,108 @@
   background-color: transparent;
   color: var(--zsempiri-wood);
   border: 1.5px solid var(--zsempiri-accent-1) !important;
+}
+
+
+/* ============================================================
+   11. HERO + COLLECTIONS COMBINED SECTION (.zsempiri-hc)
+   Egybefoglalja a hero banner-t és a category tile-okat.
+   Instance-specifikus CSS (magasság, kolonnák, overlay)
+   a section inline <style> blokkjából jön (section.id alapján).
+   ============================================================ */
+
+.zsempiri-hc {
+  overflow: visible; /* tiles negatív margin működjön */
+}
+
+/* ── Banner ───────────────────────────────────────────────── */
+.zsempiri-hc__banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8rem 5rem;
+  overflow: hidden;
+  background-color: var(--zsempiri-wood); /* fallback, ha nincs kép */
+}
+
+.zsempiri-hc__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.zsempiri-hc__bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: brightness(0.78);
+}
+
+.zsempiri-hc__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.zsempiri-hc__content {
+  position: relative;
+  z-index: 2;
+  max-width: 60rem;
+}
+
+.zsempiri-hc__heading {
+  font-family: 'Grandstander', cursive !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.40);
+  line-height: 1.1;
+  margin: 0 0 1.6rem;
+}
+
+/* Méret osztályok */
+.zsempiri-hc__heading--h0 { font-size: clamp(3rem, 6vw, 5.5rem); }
+.zsempiri-hc__heading--h1 { font-size: clamp(2.6rem, 5vw, 4.4rem); }
+.zsempiri-hc__heading--h2 { font-size: clamp(2.2rem, 4vw, 3.4rem); }
+.zsempiri-hc__heading--h3 { font-size: clamp(1.9rem, 3.5vw, 2.6rem); }
+
+.zsempiri-hc__desc {
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-family: 'Jost', sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.65;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.30);
+  margin: 0 0 2.8rem;
+}
+
+.zsempiri-hc__buttons {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.zsempiri-hc__btn {
+  border-radius: 4rem !important;
+  font-family: 'Grandstander', cursive !important;
+  font-weight: 700 !important;
+  backdrop-filter: none !important;
+}
+
+/* ── Tiles (belelógnak a banner aljába) ──────────────────── */
+.zsempiri-hc__tiles {
+  position: relative;
+  z-index: 3;
+  background-color: transparent;
+  padding-top: 0 !important;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media screen and (max-width: 749px) {
+  .zsempiri-hc__banner {
+    padding: 4rem 2rem 6rem;
+    align-items: flex-end; /* szöveg alulra csúszik mobilon */
+  }
+  .zsempiri-hc__content {
+    max-width: 100%;
+  }
+  .zsempiri-hc__heading--h0 { font-size: clamp(2.4rem, 7vw, 3.4rem); }
 }
