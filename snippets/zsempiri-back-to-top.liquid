@@ -1,0 +1,98 @@
+{%- comment -%}
+  Zsempiri Soft-Tech Back-to-Top Button
+  - Floats on the bottom right
+  - Smooth fade in/out on scroll
+  - Soft shadow and pill shape
+{%- endcomment -%}
+
+<style>
+  .zsempiri-btt {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #8F9779;
+    color: #f3ecdc;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(123, 81, 47, 0.2);
+    z-index: 999;
+    
+    /* Hidden state */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+  }
+
+  .zsempiri-btt.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .zsempiri-btt:hover {
+    background-color: #7b8366; /* Slightly darker Sage Green */
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(123, 81, 47, 0.25);
+  }
+
+  .zsempiri-btt svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media screen and (max-width: 749px) {
+    .zsempiri-btt {
+      bottom: 75px;
+      right: 15px;
+      width: 44px; /* Touch target size adjustment */
+      height: 44px;
+    }
+    .zsempiri-btt svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>
+
+<button class="zsempiri-btt" id="ZsempiriBackToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5M5 12l7-7 7 7" />
+  </svg>
+</button>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const bttButton = document.getElementById("ZsempiriBackToTop");
+    if (!bttButton) return;
+
+    // Toggle visibility based on scroll position
+    window.addEventListener("scroll", function() {
+      if (window.scrollY > 300) {
+        bttButton.classList.add("is-visible");
+      } else {
+        bttButton.classList.remove("is-visible");
+      }
+    });
+
+    // Smooth scroll to top on click
+    bttButton.addEventListener("click", function() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  });
+</script>
