@@ -3595,3 +3595,19 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+
+/* Zsempiri Soft-Tech Product Badges */
+.card__badge .badge, .badge, .price__badge-sale, .price__badge-sold-out { border-radius: 50px !important; padding: 0.6rem 1.4rem !important; font-family: 'Jost', sans-serif !important; font-weight: 700 !important; font-size: 1.1rem !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; box-shadow: 0 4px 6px rgba(123, 81, 47, 0.1) !important; border: none !important; }
+
+.badge--bottom-left.badge { bottom: 1rem; left: 1rem; }
+.badge--top-left.badge { top: 1rem; left: 1rem; }
+
+/* Sale (Akció) Badge */
+.badge:not(.badge--sold-out), .price__badge-sale { background-color: #8F9779 !important; color: #ffffff !important; }
+
+/* Sold Out (Elfogyott) Badge */
+.badge--sold-out, .price__badge-sold-out { background-color: #d4bb9b !important; color: #7b512f !important; }
+
+/* Custom Tags (e.g. New / Handcrafted) */
+.badge--custom { background-color: #f3ecdc !important; border: 1px solid #7b512f !important; color: #7b512f !important; }

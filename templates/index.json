@@ -17,7 +17,8 @@
           "settings": {
             "image": "shopify://shop_images/Kesz_husveti_kosar_celofanba_csomagolva_szalaggal_keszre_csomagolt_ajandek.jpg",
             "label": "Ajándékok",
-            "link": "shopify://collections/ajandekotletek"
+            "link": "shopify://collections/ajandekotletek",
+            "text_position": "center"
           }
         },
         "tile2": {
@@ -25,7 +26,8 @@
           "settings": {
             "image": "shopify://shop_images/fali-disz-nevre-szolo-gyerekszoba.jpg",
             "label": "Gyerekvilág",
-            "link": "shopify://collections/gyerekvilag"
+            "link": "shopify://collections/gyerekvilag",
+            "text_position": "center"
           }
         },
         "tile3": {
@@ -33,7 +35,8 @@
           "settings": {
             "image": "shopify://shop_images/hero.jpg",
             "label": "Otthon",
-            "link": "shopify://collections/otthon"
+            "link": "shopify://collections/otthon",
+            "text_position": "center"
           }
         },
         "tile4": {
@@ -41,7 +44,8 @@
           "settings": {
             "image": "shopify://shop_images/matrica-iv.jpg",
             "label": "Kiegészítők",
-            "link": "shopify://collections/kiegeszitok"
+            "link": "shopify://collections/kiegeszitok",
+            "text_position": "center"
           }
         }
       },
@@ -114,6 +118,7 @@
       ],
       "settings": {
         "bg_color": "#faf9f6",
+        "card_bg_color": "#f3ecdc",
         "show_wave_divider": false,
         "wave_color": "#f3ecdc"
       }
@@ -393,6 +398,7 @@
       "name": "Zsempiri — Features",
       "settings": {
         "bg_color": "#faf9f6",
+        "card_bg_color": "#f3ecdc",
         "show_wave_divider": false,
         "wave_color": "#f3ecdc"
       }
@@ -414,6 +420,19 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "zsempiri_before_after_dWCjAP": {
+      "type": "zsempiri-before-after",
+      "name": "Zsempiri — Before/After",
+      "settings": {
+        "heading": "Varázslat a szemünk előtt!",
+        "image_before": "shopify://shop_images/66.png",
+        "label_before": "Nyers fa",
+        "image_after": "shopify://shop_images/26.jpg",
+        "label_after": "Gravírozott",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -428,6 +447,7 @@
     "zsempiri_divider_aMPam6",
     "zsempiri_spotlight",
     "zsempiri_features_eL48ft",
+    "zsempiri_before_after_dWCjAP",
     "featured_blog_pfmXin"
   ]
 }
