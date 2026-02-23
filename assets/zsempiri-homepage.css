@@ -867,3 +867,285 @@
     font-size: clamp(2.4rem, 7vw, 3.4rem);
   }
 }
+
+
+/* ============================================================
+   12. COLLECTION TABS SECTION (.zsempiri-coltabs + .zsempiri-ccard)
+   Tab-alapú gyűjtemény böngésző; szűrők + vízszintes carousel
+   ============================================================ */
+
+.zsempiri-coltabs__inner {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .zsempiri-coltabs__inner {
+    padding: 0 3rem;
+  }
+}
+
+/* ── Fejléc sor ─────────────────────────────────────────── */
+.zsempiri-coltabs__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.zsempiri-coltabs__heading {
+  font-family: 'Grandstander', cursive !important;
+  color: var(--zsempiri-wood) !important;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  margin: 0;
+  flex: 1;
+  line-height: 1.15;
+}
+
+/* ── Nyíl gombok ────────────────────────────────────────── */
+.zsempiri-coltabs__nav {
+  display: flex;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.zsempiri-coltabs__nav-btn {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  border: 1.5px solid rgba(123, 81, 47, 0.30);
+  background: transparent;
+  color: var(--zsempiri-wood);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  padding: 0;
+}
+
+.zsempiri-coltabs__nav-btn:hover {
+  background-color: var(--zsempiri-wood);
+  color: #FDF6EA;
+  border-color: var(--zsempiri-wood);
+}
+
+.zsempiri-coltabs__nav-btn svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  display: block;
+}
+
+/* ── Tab szűrő gombok ───────────────────────────────────── */
+.zsempiri-coltabs__tabs {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.4rem;
+}
+
+.zsempiri-coltabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.4rem;
+  border-radius: 10rem;
+  border: 1.5px solid rgba(123, 81, 47, 0.25);
+  background: transparent;
+  color: var(--zsempiri-wood);
+  font-family: 'Jost', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.zsempiri-coltabs__tab:hover {
+  background-color: rgba(123, 81, 47, 0.08);
+}
+
+.zsempiri-coltabs__tab.is-active {
+  background-color: var(--zsempiri-wood);
+  color: #FDF6EA;
+  border-color: var(--zsempiri-wood);
+}
+
+.zsempiri-coltabs__tab-count {
+  font-size: 1.05rem;
+  opacity: 0.85;
+}
+
+/* ── Panelek ────────────────────────────────────────────── */
+.zsempiri-coltabs__panel {
+  display: none;
+}
+
+.zsempiri-coltabs__panel.is-active {
+  display: block;
+}
+
+/* ── Termék rács (vízszintes carousel) ─────────────────── */
+.zsempiri-coltabs__grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 0.4rem; /* scroll árnyék ne vágódjon le */
+}
+
+.zsempiri-coltabs__grid::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (min-width: 750px) {
+  .zsempiri-coltabs__grid {
+    gap: 1.6rem;
+  }
+}
+
+/* ── Termék kártya (.zsempiri-ccard) ───────────────────── */
+.zsempiri-ccard {
+  flex: 0 0 calc(50% - 0.6rem); /* 2 col mobile */
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background-color: #FDF6EA;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(123, 81, 47, 0.08);
+  border: 1.5px solid rgba(193, 165, 120, 0.40);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+@media screen and (min-width: 750px) {
+  .zsempiri-ccard {
+    flex: 0 0 calc(25% - 1.2rem); /* ~346px on 1500px container */
+  }
+}
+
+.zsempiri-ccard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(123, 81, 47, 0.16);
+}
+
+/* Kép wrapper — position:relative, az actions gomb itt van horgonyozva */
+.zsempiri-ccard__media-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Teljes méretű kép link a wrapperen belül */
+.zsempiri-ccard__img-link {
+  display: block;
+}
+
+.zsempiri-ccard__media {
+  aspect-ratio: 1 / 1; /* négyzetesre: 346×346 full HD-n */
+  overflow: hidden;
+  background-color: var(--zsempiri-cream);
+}
+
+.zsempiri-ccard__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.zsempiri-ccard:hover .zsempiri-ccard__img {
+  transform: scale(1.04);
+}
+
+/* ── Akciógombok — joined pill, középvonal = kép alja ───── */
+/* Az actions a .zsempiri-ccard__media-wrap-hoz képest van absolute,
+   translate(50%) → a gomb közepe pontosan a kép alján. */
+.zsempiri-ccard__actions {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  z-index: 2;
+  display: flex;
+  gap: 0;
+  border-radius: 10rem;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(123, 81, 47, 0.28);
+}
+
+/* Közös gomb stílus */
+.zsempiri-ccard__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.8rem;
+  height: 3.8rem;
+  background-color: var(--zsempiri-sage);
+  color: #FDF6EA;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+/* Bal gomb: bal oldal kerek, jobb oldal egyenes — vékony elválasztó */
+.zsempiri-ccard__action-btn:first-child {
+  border-right: 1px solid rgba(253, 246, 234, 0.30);
+}
+
+.zsempiri-ccard__action-btn:hover {
+  background-color: var(--zsempiri-wood);
+}
+
+.zsempiri-ccard__action-btn svg {
+  width: 1.55rem;
+  height: 1.55rem;
+  display: block;
+}
+
+/* ── Info terület (cím + ár) ───────────────────────────── */
+/* padding-top: gomb fél magassága (1.9rem) + vizuális levegő */
+.zsempiri-ccard__info {
+  display: block;
+  padding: 2.8rem 1.4rem 1.5rem;
+  text-decoration: none;
+  flex: 1;
+}
+
+.zsempiri-ccard__title {
+  font-family: 'Grandstander', cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--zsempiri-wood);
+  margin: 0 0 0.4rem;
+  line-height: 1.3;
+}
+
+.zsempiri-ccard__price {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--zsempiri-wood);
+  margin: 0;
+}
+
+.zsempiri-ccard__price-sale {
+  color: var(--zsempiri-accent-3);
+  margin-right: 0.5rem;
+}
+
+.zsempiri-ccard__price-was {
+  color: rgba(123, 81, 47, 0.45);
+  font-weight: 400;
+  font-size: 1.1rem;
+  text-decoration: line-through;
+}
