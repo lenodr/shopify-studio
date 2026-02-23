@@ -10,22 +10,11 @@
 .zsempiri-hc__content-wrapper,
 .zsempiri-tiles__wrapper,
 .zsempiri-features__inner {
-  max-width: 1200px;
+  max-width: 1520px;
   margin: 0 auto;
   padding: 0 2rem;
   width: 100%;
   box-sizing: border-box;
-}
-
-@media screen and (min-width: 750px) {
-
-  .zsempiri-hc__content-wrapper,
-  .zsempiri-tiles__wrapper,
-  .zsempiri-features__inner {
-    padding-left: 5rem;
-    padding-right: 7rem;
-    /* Asymmetric right padding for sticky banner */
-  }
 }
 
 /* ============================================================
@@ -209,7 +198,7 @@
 @media screen and (min-width: 750px) {
   .zsempiri-tiles__grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.6rem;
+    gap: 0.8rem; /* 8px gap → (1480px - 4×364px) / 3 = 8px at 1520px max-width */
   }
 }
 
@@ -218,7 +207,7 @@
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 364 / 367;
   display: block;
   text-decoration: none;
   background-color: var(--zsempiri-accent-1);
@@ -574,7 +563,7 @@
 }
 
 .zsempiri-spotlight__inner {
-  max-width: 1200px;
+  max-width: 1520px;
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
@@ -875,7 +864,7 @@
    ============================================================ */
 
 .zsempiri-coltabs__inner {
-  max-width: 1500px;
+  max-width: 1520px;
   margin: 0 auto;
   padding: 0 2rem;
 }
