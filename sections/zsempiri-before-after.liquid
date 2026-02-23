@@ -1,0 +1,336 @@
+{{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: #f3ecdc;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .zsempiri-ba-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .zsempiri-ba-heading {
+    text-align: center;
+    font-family: 'Grandstander', cursive;
+    color: var(--zsempiri-wood, #3E2723);
+    margin-bottom: 3.2rem;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+  }
+
+  .zsempiri-ba-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 2rem;
+    overflow: hidden;
+    aspect-ratio: 1 / 1; /* Alapértelmezett négyzet */
+    --exposure: 50%;
+    cursor: col-resize;
+    user-select: none;
+    touch-action: pan-y;
+    box-shadow: 0 12px 40px rgba(123, 81, 47, 0.15);
+  }
+
+  @media screen and (min-width: 750px) {
+    .zsempiri-ba-container {
+      aspect-ratio: 4 / 3; /* Asztalin szélesebb */
+    }
+  }
+
+  .zsempiri-ba-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .zsempiri-ba-after {
+    clip-path: polygon(0 0, var(--exposure) 0, var(--exposure) 100%, 0 100%);
+    z-index: 1;
+  }
+
+  .zsempiri-ba-before {
+    z-index: 0;
+  }
+
+  /* SVG Placeholderek stílusa */
+  .zsempiri-ba-image.placeholder-svg {
+    background-color: rgba(143, 151, 121, 0.2);
+    fill: rgba(143, 151, 121, 0.6);
+  }
+  .zsempiri-ba-after.placeholder-svg {
+    background-color: rgba(123, 81, 47, 0.2);
+    fill: rgba(123, 81, 47, 0.6);
+  }
+
+  .zsempiri-ba-slider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--exposure);
+    width: 4px;
+    background-color: #FDF6EA;
+    transform: translateX(-50%);
+    z-index: 2;
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+
+  .zsempiri-ba-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    background-color: #8F9779;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    border: 3px solid #FDF6EA;
+    pointer-events: auto; /* A gombot lehessen fogni */
+    cursor: grab;
+  }
+
+  .zsempiri-ba-handle:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+
+  .zsempiri-ba-handle svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #FDF6EA;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .zsempiri-ba-label {
+    position: absolute;
+    bottom: 2rem;
+    padding: 0.8rem 1.6rem;
+    background-color: rgba(253, 246, 234, 0.85); /* 85% opacity of #FDF6EA */
+    border-radius: 2rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--zsempiri-wood, #3E2723);
+    z-index: 3;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .zsempiri-ba-label--before {
+    right: 2rem;
+  }
+
+  .zsempiri-ba-label--after {
+    left: 2rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .zsempiri-ba-handle {
+      width: 40px;
+      height: 40px;
+    }
+    .zsempiri-ba-handle svg {
+      width: 20px;
+      height: 20px;
+    }
+    .zsempiri-ba-label {
+      padding: 0.6rem 1.2rem;
+      font-size: 1.2rem;
+      bottom: 1.2rem;
+    }
+    .zsempiri-ba-label--before { right: 1.2rem; }
+    .zsempiri-ba-label--after { left: 1.2rem; }
+  }
+
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="zsempiri-ba-wrapper">
+    
+    {%- if section.settings.heading != blank -%}
+      <h2 class="zsempiri-ba-heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="zsempiri-ba-container" id="ZsempiriBA-{{ section.id }}">
+      
+      {%- comment -%} ── BEFORE Image (Alul, Teljes szélességben) ── {%- endcomment -%}
+      {%- if section.settings.image_before != blank -%}
+        {{ section.settings.image_before | image_url: width: 1500 | image_tag: class: 'zsempiri-ba-image zsempiri-ba-before', loading: 'lazy' }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg zsempiri-ba-image zsempiri-ba-before' }}
+      {%- endif -%}
+
+      {%- comment -%} ── AFTER Image (Felül, CSS Clip Path vágja el a szélességet) ── {%- endcomment -%}
+      {%- if section.settings.image_after != blank -%}
+        {{ section.settings.image_after | image_url: width: 1500 | image_tag: class: 'zsempiri-ba-image zsempiri-ba-after', loading: 'lazy' }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg zsempiri-ba-image zsempiri-ba-after' }}
+      {%- endif -%}
+
+      {%- comment -%} Labels {%- endcomment -%}
+      {%- if section.settings.label_after != blank -%}
+        <div class="zsempiri-ba-label zsempiri-ba-label--after">{{ section.settings.label_after | escape }}</div>
+      {%- endif -%}
+      {%- if section.settings.label_before != blank -%}
+        <div class="zsempiri-ba-label zsempiri-ba-label--before">{{ section.settings.label_before | escape }}</div>
+      {%- endif -%}
+
+      {%- comment -%} Slider Csík és Fogantyú {%- endcomment -%}
+      <div class="zsempiri-ba-slider">
+        <div class="zsempiri-ba-handle">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 17L3 12M3 12L8 7M3 12H21M16 17L21 12M21 12L16 7" />
+          </svg>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const containers = document.querySelectorAll('.zsempiri-ba-container');
+    
+    containers.forEach(container => {
+      let isSliding = false;
+
+      const setExposure = (x) => {
+        const rect = container.getBoundingClientRect();
+        // Constrain x to container boundaries
+        const constrainedX = Math.max(0, Math.min(x, rect.width));
+        const exposure = (constrainedX / rect.width) * 100;
+        container.style.setProperty('--exposure', `${exposure}%`);
+      };
+
+      const handleMove = (e) => {
+        if (!isSliding) return;
+        
+        let clientX;
+        if (e.type.includes('touch')) {
+          clientX = e.touches[0].clientX;
+        } else {
+          // Prevent default dragging of images
+          e.preventDefault(); 
+          clientX = e.clientX;
+        }
+
+        const rect = container.getBoundingClientRect();
+        setExposure(clientX - rect.left);
+      };
+
+      // Mouse Events
+      container.addEventListener('mousedown', (e) => {
+        isSliding = true;
+        handleMove(e);
+      });
+      window.addEventListener('mouseup', () => isSliding = false);
+      window.addEventListener('mousemove', handleMove);
+
+      // Touch Events
+      container.addEventListener('touchstart', (e) => {
+        isSliding = true;
+        handleMove(e);
+      }, { passive: true });
+      window.addEventListener('touchend', () => isSliding = false);
+      window.addEventListener('touchmove', handleMove, { passive: false }); // Needs to be false to allow preventDefault if needed, but we keep it simple here
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Zsempiri — Before/After",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Főcím",
+      "default": "Varázslat a szemünk előtt!"
+    },
+    {
+      "type": "header",
+      "content": "Képek"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "Előtte kép (Háttér)",
+      "info": "Pl. Nyers fa"
+    },
+    {
+      "type": "text",
+      "id": "label_before",
+      "label": "Előtte címke",
+      "default": "Nyers fa"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "Utána kép (Ráfedülő)",
+      "info": "Pl. Gravírozott fa"
+    },
+    {
+      "type": "text",
+      "id": "label_after",
+      "label": "Utána címke",
+      "default": "Gravírozott"
+    },
+    {
+      "type": "header",
+      "content": "Térköz (Padding)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Felső térköz",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Alsó térköz",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zsempiri — Before/After"
+    }
+  ]
+}
+{% endschema %}
