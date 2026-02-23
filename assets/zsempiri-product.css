@@ -11,7 +11,8 @@
 /* Pill header kompenzáció sticky info-nál */
 @media screen and (min-width: 750px) {
   .product__column-sticky {
-    top: 8rem !important; /* pill header height + gap */
+    top: 8rem !important;
+    /* pill header height + gap */
   }
 }
 
@@ -26,12 +27,9 @@
   }
 }
 
-
 /* ============================================================
    2. MEDIA GALLERY (bal oldal)
    ============================================================ */
-
-/* Fő kép — lekerekített sarok, meleg árnyék */
 .product__media-item .media,
 .product__media-item .global-media-settings {
   border-radius: 2rem;
@@ -58,9 +56,11 @@
   opacity: 1;
 }
 
-/* Thumbnail lista gap */
-.thumbnail-list {
-  gap: 0.8rem !important;
+/* Thumbnail lista gap mobilra */
+@media screen and (max-width: 989px) {
+  .thumbnail-list {
+    gap: 0.8rem !important;
+  }
 }
 
 
@@ -329,4 +329,71 @@ nav[aria-label="breadcrumbs"] span,
   .product-form__submit.button {
     max-width: 100%;
   }
+}
+
+/* ============================================================
+   10. TINKI 3-COLUMN STYLING
+   ============================================================ */
+
+/* All images border radius */
+.product__media-item .media,
+.product__media-item .global-media-settings,
+.thumbnail {
+  border-radius: 1.5rem !important;
+}
+
+/* Collapsible Tabs (Shipping & Support in Col 3) */
+.product__buy-box-column .accordion {
+  background-color: #f3ecdc;
+  border: 1px solid #d4bb9b;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.product__buy-box-column .accordion summary {
+  padding: 1.5rem;
+}
+
+.product__buy-box-column .accordion__title,
+.product__buy-box-column .accordion__content {
+  color: #7b512f;
+}
+
+/* Quantity Selector Pill Shape */
+.product__buy-box-column .quantity {
+  border-radius: 50px !important;
+  border: 1px solid #d4bb9b !important;
+  background-color: transparent;
+}
+
+/* Buy Buttons */
+.product__buy-box-column .product-form__submit {
+  border-radius: 50px !important;
+}
+
+/* Add to cart (Secondary/Outline) */
+.product__buy-box-column .product-form__submit:not(.product-form__submit--dynamic) {
+  background-color: transparent !important;
+  border: 2px solid #7b512f !important;
+  color: #7b512f !important;
+  box-shadow: none !important;
+}
+
+.product__buy-box-column .product-form__submit:not(.product-form__submit--dynamic):hover {
+  background-color: #7b512f !important;
+  color: #ffffff !important;
+}
+
+/* Buy it now (Dynamic checkout) */
+.product__buy-box-column .shopify-payment-button__button--unbranded,
+.product__buy-box-column .shopify-payment-button__button {
+  background-color: #7b512f !important;
+  color: #ffffff !important;
+  border-radius: 50px !important;
+}
+
+.product__buy-box-column .shopify-payment-button__button:hover {
+  opacity: 0.9 !important;
 }

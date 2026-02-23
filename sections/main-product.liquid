@@ -38,6 +38,68 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    @media screen and (min-width: 990px) {
+      /* 1. Force overall layout wrapper to be 1520px wide */
+      #MainProduct-{{ section.id }} .page-width {
+        max-width: 1520px !important;
+        padding: 0 4rem;
+      }
+
+      /* 2. Override default Dawn grid and force 3-column CSS Grid */
+      #MainProduct-{{ section.id }} .zsempiri-product-3col.grid {
+        display: grid !important;
+        grid-template-columns: 5fr 6fr 4.5fr !important;
+        gap: 4rem !important;
+      }
+
+      #MainProduct-{{ section.id }} .zsempiri-product-3col.grid > .grid__item {
+        max-width: none !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+      }
+
+      /* 3. Media Gallery side-by-side flex layout (Main Image + Thumbnails) */
+      #MainProduct-{{ section.id }} .product__media-wrapper media-gallery {
+        display: flex !important;
+        gap: 2rem;
+        align-items: flex-start;
+      }
+
+      /* 4. Limit Main Image max width */
+      #MainProduct-{{ section.id }} .product__media-wrapper .slider-mobile-gutter {
+        flex: 0 0 418px;
+        max-width: 418px;
+        margin: 0 !important;
+      }
+
+      #MainProduct-{{ section.id }} .product__media-item .media {
+        width: 100% !important;
+        max-width: 418px !important;
+        aspect-ratio: 1 / 1;
+      }
+
+      /* 5. Force Thumbnails to the left via flex-order */
+      #MainProduct-{{ section.id }} .product__media-wrapper .thumbnail-slider {
+        flex: 0 0 80px;
+        order: -1; 
+        margin: 0 !important;
+        max-width: 80px; 
+      }
+
+      #MainProduct-{{ section.id }} .product__media-wrapper .thumbnail-list.slider--tablet-up {
+        display: flex;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        margin: 0 !important;
+      }
+
+      #MainProduct-{{ section.id }} .product__media-wrapper .thumbnail-list__item {
+        width: 100% !important;
+        padding: 0 !important;
+      }
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -75,19 +137,21 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
-    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    {%- assign product_form_id = 'product-form-' | append: section.id -%}
+    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %} zsempiri-product-3col">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
-      <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div class="product__info-wrapper product__details-column grid__item{% if settings.page_width > 1400 and section.settings.media_size == 'small' %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <section
           id="ProductInfo-{{ section.id }}"
           class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
         >
-          {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+          {%- assign col3_html = '' -%}
           {%- for block in section.blocks -%}
-            {%- case block.type -%}
+            {%- capture current_block_html -%}
+              {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
               {%- when 'text' -%}
@@ -727,8 +791,27 @@
                     {%- endif -%}
                   </div>
                 {%- endif -%}
-            {%- endcase -%}
+              {%- endcase -%}
+            {%- endcapture -%}
+            {%- liquid
+              assign is_col3 = false
+              if block.type == 'collapsible_tab' or block.type == 'quantity_selector' or block.type == 'popup' or block.type == 'share' or block.type == 'variant_picker' or block.type == 'buy_buttons' or block.type == 'rating'
+                assign is_col3 = true
+              endif
+            -%}
+            {%- if is_col3 -%}
+              {%- assign col3_html = col3_html | append: current_block_html -%}
+            {%- else -%}
+              {{ current_block_html }}
+            {%- endif -%}
           {%- endfor -%}
+        </section>
+      </div>
+
+      <div class="product__info-wrapper product__buy-box-column grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <section class="product__buybox-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}">
+          {{ col3_html }}
+          
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
             {{ 'products.product.view_full_details' | t }}
             {{- 'icon-arrow.svg' | inline_asset_content -}}
