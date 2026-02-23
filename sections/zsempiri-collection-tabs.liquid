@@ -97,13 +97,29 @@
                     </div>
                   </a>
                   <div class="zsempiri-ccard__actions">
-                    <a href="{{ product.url }}" class="zsempiri-ccard__action-btn" aria-label="{{ product.title | escape }} megtekintése">
+                    <a href="{{ product.url }}"
+                       class="zsempiri-ccard__action-btn"
+                       data-action="quickview"
+                       data-url="{{ product.url }}"
+                       data-title="{{ product.title | escape }}"
+                       data-img="{{ product.featured_image | image_url: width: 600 }}"
+                       data-price="{{ product.price | money | escape }}"
+                       {%- if product.compare_at_price > product.price -%}
+                       data-compare-price="{{ product.compare_at_price | money | escape }}"
+                       {%- endif -%}
+                       data-desc="{{ product.description | escape }}"
+                       data-vid="{{ product.selected_or_first_available_variant.id }}"
+                       aria-label="{{ product.title | escape }} megtekintése">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                         <circle cx="12" cy="12" r="3"/>
                       </svg>
                     </a>
-                    <a href="{{ product.url }}" class="zsempiri-ccard__action-btn" aria-label="{{ product.title | escape }} kosárba">
+                    <a href="{{ product.url }}"
+                       class="zsempiri-ccard__action-btn"
+                       data-action="add-cart"
+                       data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                       aria-label="{{ product.title | escape }} kosárba">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="12" y1="5" x2="12" y2="19"/>
                         <line x1="5" y1="12" x2="19" y2="12"/>
@@ -168,6 +184,139 @@
 </section>
 
 <script>
+/* ============================================================
+   Zsempiri — Shop Functions (globális, csak egyszer regisztrál)
+   Add to Cart + Quick View Modal
+   ============================================================ */
+if (!window.zsempiriShopFns) {
+  window.zsempiriShopFns = true;
+
+  /* XSS-biztos szöveg HTML-be illesztéshez */
+  function zEsc(str) {
+    return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /* ── Add to Cart ─────────────────────────────────────────── */
+  window.zsempiriAddToCart = async function (variantId, btn) {
+    if (btn.dataset.loading) return;
+    btn.dataset.loading = '1';
+
+    try {
+      var res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ id: parseInt(variantId, 10), quantity: 1 })
+      });
+      if (!res.ok) throw new Error('cart-add failed');
+
+      /* Kosár darabszám frissítése */
+      var cartRes = await fetch('/cart.js');
+      var cart = await cartRes.json();
+      document.querySelectorAll('.cart-count-bubble').forEach(function (el) {
+        var n = el.querySelector('[aria-hidden]');
+        var v = el.querySelector('.visually-hidden');
+        if (n) n.textContent = cart.item_count;
+        if (v) v.textContent = cart.item_count + ' items';
+        el.classList.remove('is-empty');
+      });
+
+      /* Vizuális visszajelzés: zöld → visszaáll */
+      btn.style.setProperty('background-color', 'var(--zsempiri-sage)');
+      btn.style.setProperty('color', '#FDF6EA');
+      setTimeout(function () {
+        btn.style.removeProperty('background-color');
+        btn.style.removeProperty('color');
+        delete btn.dataset.loading;
+      }, 1600);
+
+    } catch (e) {
+      delete btn.dataset.loading;
+      console.error('[zsempiri] Add to cart error:', e);
+    }
+  };
+
+  /* ── Quick View Modal ────────────────────────────────────── */
+  var _qvModal = null;
+
+  function _buildQVModal() {
+    if (_qvModal) return _qvModal;
+    _qvModal = document.createElement('div');
+    _qvModal.id = 'zsempiri-qv-modal';
+    _qvModal.setAttribute('role', 'dialog');
+    _qvModal.setAttribute('aria-modal', 'true');
+    _qvModal.innerHTML =
+      '<div class="zsempiri-qv__backdrop"></div>' +
+      '<div class="zsempiri-qv__dialog">' +
+        '<button class="zsempiri-qv__close" aria-label="Bezárás">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">' +
+            '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>' +
+          '</svg>' +
+        '</button>' +
+        '<div class="zsempiri-qv__body"></div>' +
+      '</div>';
+    document.body.appendChild(_qvModal);
+    _qvModal.querySelector('.zsempiri-qv__backdrop').addEventListener('click', window.zsempiriCloseQV);
+    _qvModal.querySelector('.zsempiri-qv__close').addEventListener('click', window.zsempiriCloseQV);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && _qvModal && _qvModal.classList.contains('is-open')) {
+        window.zsempiriCloseQV();
+      }
+    });
+    return _qvModal;
+  }
+
+  window.zsempiriCloseQV = function () {
+    if (_qvModal) _qvModal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
+  /* Szinkron quick view — minden adat a Liquid-rendered data attribútumokból jön */
+  window.zsempiriOpenQV = function (btn) {
+    var modal      = _buildQVModal();
+    var body       = modal.querySelector('.zsempiri-qv__body');
+    var title      = btn.dataset.title      || '';
+    var imgSrc     = btn.dataset.img        || '';
+    var price      = btn.dataset.price      || '';
+    var cmpPrice   = btn.dataset.comparePrice || '';
+    var desc       = btn.dataset.desc       || '';   /* Liquid: product.description | escape */
+    var variantId  = btn.dataset.vid        || '';
+    var productUrl = btn.dataset.url        || btn.getAttribute('href') || '#';
+
+    var priceHtml = cmpPrice
+      ? '<span class="zsempiri-qv__price-sale">' + zEsc(price) + '</span>' +
+        '<s class="zsempiri-qv__price-was">' + zEsc(cmpPrice) + '</s>'
+      : '<span>' + zEsc(price) + '</span>';
+
+    body.innerHTML =
+      '<div class="zsempiri-qv__layout">' +
+        '<div class="zsempiri-qv__media">' +
+          (imgSrc ? '<img src="' + zEsc(imgSrc) + '" alt="' + zEsc(title) + '" class="zsempiri-qv__img" loading="lazy">' : '') +
+        '</div>' +
+        '<div class="zsempiri-qv__info">' +
+          '<h2 class="zsempiri-qv__title">' + zEsc(title) + '</h2>' +
+          '<p class="zsempiri-qv__price">' + priceHtml + '</p>' +
+          (desc ? '<div class="zsempiri-qv__desc">' + desc + '</div>' : '') +
+          '<div class="zsempiri-qv__btns">' +
+            (variantId ? '<button class="zsempiri-qv__add-btn" data-vid="' + zEsc(variantId) + '">Kosárba</button>' : '') +
+            '<a href="' + zEsc(productUrl) + '" class="zsempiri-qv__view-link">Termék megtekintése →</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    if (variantId) {
+      body.querySelector('.zsempiri-qv__add-btn').addEventListener('click', function () {
+        zsempiriAddToCart(this.dataset.vid, this);
+      });
+    }
+
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+}
+
+/* ============================================================
+   Section-specifikus: tabs, carousel, gomb-kötések
+   ============================================================ */
 (function () {
   var root = document.getElementById('zcoltabs-{{ section.id }}');
   if (!root) return;
@@ -189,7 +338,6 @@
       var panel = root.querySelector('[data-zcolpanel="' + id + '"]');
       if (panel) {
         panel.classList.add('is-active');
-        /* Reset scroll when switching tabs */
         var track = panel.querySelector('[data-zcoltrack]');
         if (track) track.scrollLeft = 0;
       }
@@ -217,6 +365,22 @@
       if (t) t.scrollBy({ left: t.clientWidth, behavior: 'smooth' });
     });
   }
+
+  /* ── Quick View gombok ───────────────────────────────────── */
+  root.querySelectorAll('[data-action="quickview"]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      zsempiriOpenQV(btn);  /* a gomb maga tartalmazza az összes adatot */
+    });
+  });
+
+  /* ── Add to Cart gombok ──────────────────────────────────── */
+  root.querySelectorAll('[data-action="add-cart"]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      zsempiriAddToCart(btn.dataset.variantId, btn);
+    });
+  });
 })();
 </script>
 

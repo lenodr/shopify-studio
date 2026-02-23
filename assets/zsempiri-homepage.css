@@ -1086,24 +1086,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.8rem;
+  width: 5.2rem;
   height: 3.8rem;
-  background-color: var(--zsempiri-sage);
-  color: #FDF6EA;
+  background-color: #FCF5E9;
+  color: var(--zsempiri-wood);
   text-decoration: none;
   cursor: pointer;
   padding: 0;
   border: none;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Bal gomb: bal oldal kerek, jobb oldal egyenes — vékony elválasztó */
+/* Bal gomb: vékony elválasztó */
 .zsempiri-ccard__action-btn:first-child {
-  border-right: 1px solid rgba(253, 246, 234, 0.30);
+  border-right: 1px solid rgba(123, 81, 47, 0.15);
 }
 
 .zsempiri-ccard__action-btn:hover {
-  background-color: var(--zsempiri-wood);
+  background-color: var(--zsempiri-sage);
+  color: #FDF6EA;
 }
 
 .zsempiri-ccard__action-btn svg {
@@ -1148,4 +1149,224 @@
   font-weight: 400;
   font-size: 1.1rem;
   text-decoration: line-through;
+}
+
+
+/* ============================================================
+   13. QUICK VIEW MODAL (#zsempiri-qv-modal)
+   ============================================================ */
+
+#zsempiri-qv-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+#zsempiri-qv-modal.is-open {
+  display: block;
+}
+
+.zsempiri-qv__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 15, 5, 0.52);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.zsempiri-qv__dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #FAF9F6;
+  border-radius: 1.6rem;
+  box-shadow: 0 24px 80px rgba(30, 15, 5, 0.28);
+  max-width: 86rem;
+  width: calc(100% - 3.2rem);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 3.2rem 3.2rem 4rem;
+}
+
+.zsempiri-qv__close {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  border: 1.5px solid rgba(123, 81, 47, 0.22);
+  background: transparent;
+  color: var(--zsempiri-wood);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.2s ease;
+}
+
+.zsempiri-qv__close:hover {
+  background-color: rgba(123, 81, 47, 0.08);
+}
+
+.zsempiri-qv__close svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  display: block;
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+.zsempiri-qv__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .zsempiri-qv__layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+/* ── Kép ─────────────────────────────────────────────────── */
+.zsempiri-qv__media {
+  border-radius: 1rem;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background-color: var(--zsempiri-cream);
+}
+
+.zsempiri-qv__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Info ────────────────────────────────────────────────── */
+.zsempiri-qv__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding-top: 0.4rem;
+}
+
+.zsempiri-qv__title {
+  font-family: 'Grandstander', cursive !important;
+  color: var(--zsempiri-wood) !important;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.zsempiri-qv__price {
+  font-family: 'Jost', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--zsempiri-wood);
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.zsempiri-qv__price-sale {
+  color: var(--zsempiri-accent-3, #c18763);
+}
+
+.zsempiri-qv__price-was {
+  color: rgba(123, 81, 47, 0.42);
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.zsempiri-qv__desc {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.4rem;
+  color: rgba(123, 81, 47, 0.72);
+  line-height: 1.65;
+  max-height: 22rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(123, 81, 47, 0.25) transparent;
+}
+
+.zsempiri-qv__desc p  { margin: 0 0 0.8rem; }
+.zsempiri-qv__desc ul,
+.zsempiri-qv__desc ol { margin: 0 0 0.8rem; padding-left: 1.8rem; }
+.zsempiri-qv__desc li { margin-bottom: 0.3rem; }
+.zsempiri-qv__desc strong,
+.zsempiri-qv__desc b  { font-weight: 700; color: var(--zsempiri-wood); }
+
+/* ── Gombok ──────────────────────────────────────────────── */
+.zsempiri-qv__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.zsempiri-qv__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.3rem 2.4rem;
+  background-color: var(--zsempiri-sage);
+  color: #FDF6EA;
+  border: none;
+  border-radius: 0.8rem;
+  font-family: 'Grandstander', cursive;
+  font-size: 1.45rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.zsempiri-qv__add-btn:hover {
+  background-color: var(--zsempiri-wood);
+}
+
+.zsempiri-qv__view-link {
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 1.3rem;
+  color: var(--zsempiri-wood);
+  opacity: 0.60;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.zsempiri-qv__view-link:hover {
+  opacity: 1;
+}
+
+/* ── Betöltés spinner ────────────────────────────────────── */
+.zsempiri-qv__spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22rem;
+}
+
+.zsempiri-qv__spinner::after {
+  content: '';
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 3px solid rgba(123, 81, 47, 0.18);
+  border-top-color: var(--zsempiri-wood);
+  border-radius: 50%;
+  animation: zsempiriSpin 0.7s linear infinite;
+}
+
+@keyframes zsempiriSpin {
+  to { transform: rotate(360deg); }
 }
