@@ -17,7 +17,7 @@
           "settings": {
             "image": "shopify://shop_images/Kesz_husveti_kosar_celofanba_csomagolva_szalaggal_keszre_csomagolt_ajandek.jpg",
             "label": "Ajándékok",
-            "link": "/collections/ajandekoknak"
+            "link": "shopify://collections/ajandekotletek"
           }
         },
         "tile2": {
@@ -25,7 +25,7 @@
           "settings": {
             "image": "shopify://shop_images/fali-disz-nevre-szolo-gyerekszoba.jpg",
             "label": "Gyerekvilág",
-            "link": "/collections/gyerekeknek"
+            "link": "shopify://collections/gyerekvilag"
           }
         },
         "tile3": {
@@ -33,7 +33,7 @@
           "settings": {
             "image": "shopify://shop_images/hero.jpg",
             "label": "Otthon",
-            "link": "/collections/otthonra"
+            "link": "shopify://collections/otthon"
           }
         },
         "tile4": {
@@ -41,7 +41,7 @@
           "settings": {
             "image": "shopify://shop_images/matrica-iv.jpg",
             "label": "Kiegészítők",
-            "link": "/collections/kiegeszitok"
+            "link": "shopify://collections/kiegeszitok"
           }
         }
       },
@@ -68,6 +68,137 @@
         "columns_desktop": 4,
         "columns_mobile": "2",
         "overlap": 12
+      }
+    },
+    "zsempiri_features": {
+      "type": "zsempiri-features",
+      "blocks": {
+        "feat1": {
+          "type": "feature",
+          "settings": {
+            "icon": "🚚",
+            "title": "Ingyenes szállítás",
+            "text": "110 € feletti rendelésnél"
+          }
+        },
+        "feat2": {
+          "type": "feature",
+          "settings": {
+            "icon": "🔄",
+            "title": "Pénzvisszafizetés",
+            "text": "30 napos cseregarancia"
+          }
+        },
+        "feat3": {
+          "type": "feature",
+          "settings": {
+            "icon": "💬",
+            "title": "Online support",
+            "text": "Hétköznap 9–17 között"
+          }
+        },
+        "feat4": {
+          "type": "feature",
+          "settings": {
+            "icon": "💳",
+            "title": "Rugalmas fizetés",
+            "text": "Több fizetési mód elérhető"
+          }
+        }
+      },
+      "block_order": [
+        "feat1",
+        "feat2",
+        "feat3",
+        "feat4"
+      ],
+      "settings": {
+        "bg_color": "#faf9f6",
+        "show_wave_divider": false,
+        "wave_color": "#f3ecdc"
+      }
+    },
+    "rich_text_nWH6Fp": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_rUp99t": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Szívből, kézzel, Neked</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_AELCbg": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_mFLeFk": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_rUp99t",
+        "text_AELCbg",
+        "button_mFLeFk"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 52
+      }
+    },
+    "zsempiri_divider_features": {
+      "type": "zsempiri-divider",
+      "settings": {
+        "wave_style": "hills-1",
+        "fill_color": "#f3ecdc",
+        "bg_color": "#faf9f6",
+        "height": 60,
+        "flip": false,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 4,
+        "title": "Legújabb termékeink",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-04147404-24d8-4246-b192-3510ad7f9048",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "zsempiri_marquee": {
@@ -131,56 +262,111 @@
         "padding_vertical": 10
       }
     },
-    "zsempiri_features": {
-      "type": "zsempiri-features",
+    "image_with_text_crc79J": {
+      "type": "image-with-text",
       "blocks": {
-        "feat1": {
-          "type": "feature",
+        "heading_DfnXne": {
+          "type": "heading",
           "settings": {
-            "icon": "🚚",
-            "title": "Ingyenes szállítás",
-            "text": "110 € feletti rendelésnél"
+            "heading": "<strong>Dobd fel a húsvéti hangulatot</strong>",
+            "heading_size": "h0"
           }
         },
-        "feat2": {
-          "type": "feature",
+        "text_g7ghiG": {
+          "type": "text",
           "settings": {
-            "icon": "🔄",
-            "title": "Pénzvisszafizetés",
-            "text": "30 napos cseregarancia"
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_style": "body"
           }
         },
-        "feat3": {
-          "type": "feature",
+        "button_qwbgNY": {
+          "type": "button",
           "settings": {
-            "icon": "💬",
-            "title": "Online support",
-            "text": "Hétköznap 9–17 között"
-          }
-        },
-        "feat4": {
-          "type": "feature",
-          "settings": {
-            "icon": "💳",
-            "title": "Rugalmas fizetés",
-            "text": "Több fizetési mód elérhető"
+            "button_label": "Felfedezem",
+            "button_link": "",
+            "button_style_secondary": false
           }
         }
       },
       "block_order": [
-        "feat1",
-        "feat2",
-        "feat3",
-        "feat4"
+        "heading_DfnXne",
+        "text_g7ghiG",
+        "button_qwbgNY"
       ],
+      "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "bg_color": "#faf9f6",
-        "show_wave_divider": false,
-        "wave_color": "#f3ecdc"
+        "image": "shopify://shop_images/kosar-variacio.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
-    "zsempiri_divider_features": {
+    "multicolumn_8nqpMQ": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_Cn7Mrk": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_BRxQnn": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_V4PNwH": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_Cn7Mrk",
+        "column_BRxQnn",
+        "column_V4PNwH"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "<strong>Rólunk Mondtátok</strong>",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Button label",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "zsempiri_divider_aMPam6": {
       "type": "zsempiri-divider",
+      "name": "Zsempiri — Divider",
       "settings": {
         "wave_style": "hills-1",
         "fill_color": "#f3ecdc",
@@ -191,34 +377,6 @@
         "margin_bottom": 0
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "all",
-        "products_to_show": 8,
-        "title": "Legújabb termékeink",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
-    },
     "zsempiri_spotlight": {
       "type": "zsempiri-product-spotlight",
       "settings": {
@@ -227,26 +385,49 @@
         "countdown_end": "2026-04-19T23:59:00",
         "badge_text": "🔥 Akció",
         "description": "",
-        "bg_color": "#faf9f6"
+        "bg_color": "#f3ecdc"
       }
     },
     "zsempiri_features_eL48ft": {
       "type": "zsempiri-features",
       "name": "Zsempiri — Features",
       "settings": {
-        "bg_color": "#FAF9F6",
+        "bg_color": "#faf9f6",
         "show_wave_divider": false,
         "wave_color": "#f3ecdc"
+      }
+    },
+    "featured_blog_pfmXin": {
+      "type": "featured-blog",
+      "name": "t:sections.featured-blog.presets.name",
+      "settings": {
+        "blog": "news",
+        "post_limit": 3,
+        "heading": "<strong>Ajánlott cikkek</strong>",
+        "heading_size": "h1",
+        "columns_desktop": 3,
+        "show_view_all": false,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
   "order": [
     "zsempiri_hero_coll",
-    "zsempiri_marquee",
     "zsempiri_features",
+    "rich_text_nWH6Fp",
     "zsempiri_divider_features",
     "featured_collection",
+    "zsempiri_marquee",
+    "image_with_text_crc79J",
+    "multicolumn_8nqpMQ",
+    "zsempiri_divider_aMPam6",
     "zsempiri_spotlight",
-    "zsempiri_features_eL48ft"
+    "zsempiri_features_eL48ft",
+    "featured_blog_pfmXin"
   ]
 }
