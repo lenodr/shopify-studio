@@ -144,7 +144,7 @@
                 {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg zsempiri-tile__img' }}
               {%- endif -%}
             </div>
-            <div class="zsempiri-tile__label">
+            <div class="zsempiri-tile__label zsempiri-tile__label--{{ block.settings.text_position | default: 'center' }}">
               <span class="zsempiri-tile__name">{{ tile_label }}</span>
             </div>
           </a>
@@ -345,6 +345,17 @@
           "type": "url",
           "id": "link",
           "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Szöveg helyzete",
+          "options": [
+            { "value": "top",    "label": "Fent" },
+            { "value": "center", "label": "Középen" },
+            { "value": "bottom", "label": "Lent" }
+          ],
+          "default": "center"
         }
       ]
     }

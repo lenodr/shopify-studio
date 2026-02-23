@@ -118,7 +118,7 @@ body::before {
 /* ─── Pill wrapper: minden oldal, görgetés után ─────────────── */
 .header-wrapper {
   margin: 1.2rem 1.6rem 0 !important;
-  border-radius: 10rem !important;
+  border-radius: 2.5rem !important;
   background-color: rgba(243, 236, 220, 0.90) !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
@@ -245,7 +245,7 @@ body.template-index .section-header:not(.scrolled-past-header) .header__icon .ic
 @media screen and (max-width: 749px) {
   .header-wrapper {
     margin: 0.8rem 1rem 0 !important;
-    border-radius: 6rem !important;
+    border-radius: 2rem !important;
   }
 }
 
@@ -297,7 +297,7 @@ button[type="submit"]:not(.shopify-payment-button__button--unbranded):not(.quant
 
 /* Dynamic checkout wrapper */
 .shopify-payment-button__button {
-  border-radius: 4rem !important;
+  border-radius: 0.8rem !important;
   overflow: hidden;
 }
 
@@ -345,7 +345,7 @@ button[type="submit"]:not(.shopify-payment-button__button--unbranded):not(.quant
 .quick-add-modal__toggle {
   background-color: var(--zsempiri-sage) !important;
   color: #ffffff !important;
-  border-radius: 4rem !important;
+  border-radius: 0.8rem !important;
   font-family: 'Grandstander', cursive !important;
   font-weight: 700 !important;
 }
@@ -511,7 +511,7 @@ textarea:focus,
 .global-settings-popup {
   background-color: var(--zsempiri-card-bg) !important;
   border-color: var(--zsempiri-accent-1) !important;
-  border-radius: 1.6rem !important;
+  border-radius: 1rem !important;
   box-shadow: 0 1.2rem 3rem rgba(123, 81, 47, 0.12) !important;
 }
 

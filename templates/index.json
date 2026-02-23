@@ -76,7 +76,7 @@
         "feat1": {
           "type": "feature",
           "settings": {
-            "icon": "🚚",
+            "icon": "truck",
             "title": "Ingyenes szállítás",
             "text": "110 € feletti rendelésnél"
           }
@@ -84,7 +84,7 @@
         "feat2": {
           "type": "feature",
           "settings": {
-            "icon": "🔄",
+            "icon": "return",
             "title": "Pénzvisszafizetés",
             "text": "30 napos cseregarancia"
           }
@@ -92,7 +92,7 @@
         "feat3": {
           "type": "feature",
           "settings": {
-            "icon": "💬",
+            "icon": "chat",
             "title": "Online support",
             "text": "Hétköznap 9–17 között"
           }
@@ -100,7 +100,7 @@
         "feat4": {
           "type": "feature",
           "settings": {
-            "icon": "💳",
+            "icon": "card",
             "title": "Rugalmas fizetés",
             "text": "Több fizetési mód elérhető"
           }
