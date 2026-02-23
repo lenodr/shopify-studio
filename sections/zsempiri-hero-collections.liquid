@@ -82,12 +82,13 @@
     </div>
     <div class="zsempiri-hc__overlay" aria-hidden="true"></div>
 
-    <div class="zsempiri-hc__content">
+    <div class="zsempiri-hc__content-wrapper">
+      <div class="zsempiri-hc__content">
 
-      {%- if heading != blank -%}
-        <{{ section.settings.heading_tag }} class="zsempiri-hc__heading zsempiri-hc__heading--{{ heading_size }}">
-          {{ heading }}
-        </{{ section.settings.heading_tag }}>
+        {%- if heading != blank -%}
+          <{{ section.settings.heading_tag }} class="zsempiri-hc__heading zsempiri-hc__heading--{{ heading_size }}">
+            {{ heading }}
+          </{{ section.settings.heading_tag }}>
       {%- endif -%}
 
       {%- if description != blank -%}
@@ -114,42 +115,45 @@
         </div>
       {%- endif -%}
 
+      </div>
     </div>
   </div>
 
   {%- comment -%} ── Collection tiles (belelóg a hero aljába) ────── {%- endcomment -%}
   {%- if section.blocks.size > 0 -%}
     <div class="zsempiri-tiles zsempiri-hc__tiles">
-      <div class="zsempiri-tiles__grid">
-        {%- for block in section.blocks -%}
-          {%- assign tile_image = block.settings.image -%}
-          {%- assign tile_label = block.settings.label -%}
-          {%- assign tile_link  = block.settings.link | default: '#' -%}
-          {%- assign tile_alt   = tile_label | escape -%}
+      <div class="zsempiri-tiles__wrapper">
+        <div class="zsempiri-tiles__grid">
+          {%- for block in section.blocks -%}
+            {%- assign tile_image = block.settings.image -%}
+            {%- assign tile_label = block.settings.label -%}
+            {%- assign tile_link  = block.settings.link | default: '#' -%}
+            {%- assign tile_alt   = tile_label | escape -%}
 
-          <a href="{{ tile_link }}" class="zsempiri-tile" {{ block.shopify_attributes }}>
-            <div class="zsempiri-tile__media">
-              {%- if tile_image != blank -%}
-                {{
-                  tile_image
-                  | image_url: width: 800
-                  | image_tag:
-                    class: 'zsempiri-tile__img',
-                    alt: tile_alt,
-                    loading: 'lazy',
-                    widths: '400, 600, 800',
-                    sizes: '(min-width: 750px) 25vw, 50vw'
-                }}
-              {%- else -%}
-                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg zsempiri-tile__img' }}
-              {%- endif -%}
-            </div>
-            <div class="zsempiri-tile__label zsempiri-tile__label--{{ block.settings.text_position | default: 'center' }}">
-              <span class="zsempiri-tile__name">{{ tile_label }}</span>
-            </div>
-          </a>
+            <a href="{{ tile_link }}" class="zsempiri-tile" {{ block.shopify_attributes }}>
+              <div class="zsempiri-tile__media">
+                {%- if tile_image != blank -%}
+                  {{
+                    tile_image
+                    | image_url: width: 800
+                    | image_tag:
+                      class: 'zsempiri-tile__img',
+                      alt: tile_alt,
+                      loading: 'lazy',
+                      widths: '400, 600, 800',
+                      sizes: '(min-width: 750px) 25vw, 50vw'
+                  }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg zsempiri-tile__img' }}
+                {%- endif -%}
+              </div>
+              <div class="zsempiri-tile__label zsempiri-tile__label--{{ block.settings.text_position | default: 'center' }}">
+                <span class="zsempiri-tile__name">{{ tile_label }}</span>
+              </div>
+            </a>
 
-        {%- endfor -%}
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   {%- endif -%}

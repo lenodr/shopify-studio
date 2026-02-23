@@ -5,6 +5,30 @@
 
 
 /* ============================================================
+   0. COMMON ALIGNMENT WRAPPER (Hero, Tiles, Features)
+   ============================================================ */
+.zsempiri-hc__content-wrapper,
+.zsempiri-tiles__wrapper,
+.zsempiri-features__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 750px) {
+
+  .zsempiri-hc__content-wrapper,
+  .zsempiri-tiles__wrapper,
+  .zsempiri-features__inner {
+    padding-left: 5rem;
+    padding-right: 7rem;
+    /* Asymmetric right padding for sticky banner */
+  }
+}
+
+/* ============================================================
    1. HERO (image-banner section)
    Szöveg közvetlenül a hero képen — NEM szövegdobozban.
    show_text_box: false az index.json-ban.
@@ -12,12 +36,10 @@
 
 /* Sötétebb gradient overlay — szöveg olvashatóságáért */
 .banner::after {
-  background: linear-gradient(
-    105deg,
-    rgba(30, 15, 5, 0.55) 0%,
-    rgba(30, 15, 5, 0.25) 55%,
-    transparent 80%
-  ) !important;
+  background: linear-gradient(105deg,
+      rgba(30, 15, 5, 0.55) 0%,
+      rgba(30, 15, 5, 0.25) 55%,
+      transparent 80%) !important;
   opacity: 1 !important;
 }
 
@@ -39,7 +61,7 @@
 .banner .banner__heading,
 .banner .h0 {
   font-family: 'Grandstander', cursive !important;
-  color: #ffffff !important;
+  color: #FDF6EA !important;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.40);
   font-size: clamp(2.8rem, 5.5vw, 5rem);
   line-height: 1.1;
@@ -49,7 +71,7 @@
 .banner p,
 .banner .banner__text,
 .banner .rte p {
-  color: rgba(255, 255, 255, 0.88) !important;
+  color: rgba(253, 246, 234, 0.88) !important;
   font-family: 'Jost', sans-serif;
   font-size: 1.6rem;
   line-height: 1.65;
@@ -60,7 +82,7 @@
 .banner .button,
 .banner .button--primary {
   background-color: var(--zsempiri-sage) !important;
-  color: #ffffff !important;
+  color: #FDF6EA !important;
   border-radius: 0.8rem !important;
   border: none !important;
   font-family: 'Grandstander', cursive !important;
@@ -75,8 +97,13 @@
 }
 
 @media screen and (min-width: 990px) {
-  .banner--medium { min-height: 65vh; }
-  .banner--large  { min-height: 80vh; }
+  .banner--medium {
+    min-height: 65vh;
+  }
+
+  .banner--large {
+    min-height: 80vh;
+  }
 }
 
 
@@ -139,12 +166,19 @@
 }
 
 @keyframes zsempiriMarquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .zsempiri-marquee__track { animation: none; }
+  .zsempiri-marquee__track {
+    animation: none;
+  }
 }
 
 
@@ -170,16 +204,12 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  padding: 0 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 @media screen and (min-width: 750px) {
   .zsempiri-tiles__grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.6rem;
-    padding: 0 2rem;
   }
 }
 
@@ -188,13 +218,13 @@
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   display: block;
   text-decoration: none;
   background-color: var(--zsempiri-accent-1);
   box-shadow: 0 6px 20px rgba(123, 81, 47, 0.12);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.3s ease;
+    box-shadow 0.3s ease;
 }
 
 .zsempiri-tile:hover {
@@ -226,12 +256,10 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(74, 42, 16, 0.75) 0%,
-    rgba(74, 42, 16, 0.15) 45%,
-    transparent 70%
-  );
+  background: linear-gradient(to top,
+      rgba(74, 42, 16, 0.75) 0%,
+      rgba(74, 42, 16, 0.15) 45%,
+      transparent 70%);
   pointer-events: none;
 }
 
@@ -252,7 +280,7 @@
   font-family: 'Grandstander', cursive;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #FDF6EA;
   letter-spacing: 0.02em;
   line-height: 1.2;
 }
@@ -262,8 +290,8 @@
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.20);
-  border: 1px solid rgba(255, 255, 255, 0.40);
+  background-color: rgba(253, 246, 234, 0.20);
+  border: 1px solid rgba(253, 246, 234, 0.40);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -280,7 +308,7 @@
   width: 1.2rem;
   height: 1.2rem;
   fill: none;
-  stroke: #ffffff;
+  stroke: #FDF6EA;
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -354,8 +382,8 @@
 /* A tiles heading (ha van) a rácsot megelőzi —
    A rácsnak van elegendő paddingja lent */
 .zsempiri-tiles__heading {
-  color: #ffffff !important;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  color: #FDF6EA !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
   margin-bottom: 1.6rem;
   padding-top: 0.8rem;
 }
@@ -379,7 +407,7 @@
   left: 50%;
   transform: translateX(-50%);
   padding: 0.75rem 1.4rem;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(253, 246, 234, 0.92);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-radius: 0.6rem;
@@ -388,7 +416,7 @@
   align-items: center;
   justify-content: center;
   right: auto;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
 /* Szöveg pozíció modifier osztályok */
@@ -397,11 +425,13 @@
   top: 1.2rem;
   transform: translateX(-50%);
 }
+
 .zsempiri-tile__label--center {
   bottom: auto;
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 /* --bottom: alapértelmezett, külön szabály nem kell */
 
 .zsempiri-tile__name {
@@ -427,11 +457,7 @@
   position: relative;
 }
 
-.zsempiri-features__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
+/* Inner wrapper uses common layout CSS from top of file */
 
 .zsempiri-features__grid {
   display: grid;
@@ -502,13 +528,16 @@
   .zsempiri-feature-card {
     padding: 1.4rem 1.6rem;
   }
+
   .zsempiri-feature-card__icon svg {
     width: 2.2rem;
     height: 2.2rem;
   }
+
   .zsempiri-feature-card__title {
     font-size: 1.3rem;
   }
+
   .zsempiri-feature-card__text {
     font-size: 1.1rem;
   }
@@ -708,7 +737,7 @@
 
 .zsempiri-spotlight__cta--primary {
   background-color: var(--zsempiri-sage);
-  color: #ffffff;
+  color: #FDF6EA;
 }
 
 .zsempiri-spotlight__cta--secondary {
@@ -726,7 +755,8 @@
    ============================================================ */
 
 .zsempiri-hc {
-  overflow: visible; /* tiles negatív margin működjön */
+  overflow: visible;
+  /* tiles negatív margin működjön */
 }
 
 /* ── Banner ───────────────────────────────────────────────── */
@@ -734,9 +764,10 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 8rem 5rem;
+  padding: 8rem 0;
   overflow: hidden;
-  background-color: var(--zsempiri-wood); /* fallback, ha nincs kép */
+  background-color: var(--zsempiri-wood);
+  /* fallback, ha nincs kép */
 }
 
 .zsempiri-hc__bg {
@@ -767,20 +798,31 @@
 
 .zsempiri-hc__heading {
   font-family: 'Grandstander', cursive !important;
-  color: #ffffff !important;
+  color: #FDF6EA !important;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.40);
   line-height: 1.1;
   margin: 0 0 1.6rem;
 }
 
 /* Méret osztályok */
-.zsempiri-hc__heading--h0 { font-size: clamp(3rem, 6vw, 5.5rem); }
-.zsempiri-hc__heading--h1 { font-size: clamp(2.6rem, 5vw, 4.4rem); }
-.zsempiri-hc__heading--h2 { font-size: clamp(2.2rem, 4vw, 3.4rem); }
-.zsempiri-hc__heading--h3 { font-size: clamp(1.9rem, 3.5vw, 2.6rem); }
+.zsempiri-hc__heading--h0 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+}
+
+.zsempiri-hc__heading--h1 {
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+}
+
+.zsempiri-hc__heading--h2 {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+}
+
+.zsempiri-hc__heading--h3 {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+}
 
 .zsempiri-hc__desc {
-  color: rgba(255, 255, 255, 0.88) !important;
+  color: rgba(253, 246, 234, 0.88) !important;
   font-family: 'Jost', sans-serif;
   font-size: 1.6rem;
   line-height: 1.65;
@@ -813,10 +855,15 @@
 @media screen and (max-width: 749px) {
   .zsempiri-hc__banner {
     padding: 4rem 2rem 6rem;
-    align-items: flex-end; /* szöveg alulra csúszik mobilon */
+    align-items: flex-end;
+    /* szöveg alulra csúszik mobilon */
   }
+
   .zsempiri-hc__content {
     max-width: 100%;
   }
-  .zsempiri-hc__heading--h0 { font-size: clamp(2.4rem, 7vw, 3.4rem); }
+
+  .zsempiri-hc__heading--h0 {
+    font-size: clamp(2.4rem, 7vw, 3.4rem);
+  }
 }
