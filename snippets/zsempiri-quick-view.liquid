@@ -1,0 +1,209 @@
+{%- comment -%}
+  Zsempiri Soft-Tech Quick View Modal Overlay
+  Contains scoped styling, the empty modal container, and the spinner.
+{%- endcomment -%}
+
+<style>
+  .zsempiri-qv-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(123, 81, 47, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .zsempiri-qv-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .zsempiri-qv-modal {
+    position: relative;
+    background-color: #f3ecdc;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    border-radius: 2rem;
+    box-shadow: 0 20px 40px rgba(123, 81, 47, 0.15);
+    overflow-y: auto;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 2rem;
+  }
+
+  .zsempiri-qv-overlay.is-open .zsempiri-qv-modal {
+    transform: scale(1);
+  }
+
+  .zsempiri-qv-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #d4bb9b;
+    border: none;
+    color: #7b512f;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .zsempiri-qv-close:hover {
+    background-color: #c9a882;
+    transform: scale(1.05);
+  }
+
+  .zsempiri-qv-close svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+
+  .zsempiri-qv-content {
+    /* Container for fetched HTML */
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .zsempiri-qv-content.is-loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .zsempiri-qv-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+
+  .zsempiri-qv-content.is-loading ~ .zsempiri-qv-spinner {
+    display: block;
+  }
+
+  .zsempiri-qv-spinner svg {
+    width: 40px;
+    height: 40px;
+    animation: zsempiriRotate 2s linear infinite;
+    stroke: #8F9779;
+  }
+
+  .zsempiri-qv-spinner circle {
+    stroke-width: 3;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    animation: zsempiriDash 1.5s ease-in-out infinite;
+    stroke-linecap: round;
+  }
+
+  @keyframes zsempiriRotate {
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes zsempiriDash {
+    0% { stroke-dasharray: 1, 200; stroke-dashoffset: 0; }
+    50% { stroke-dasharray: 90, 200; stroke-dashoffset: -35px; }
+    100% { stroke-dasharray: 90, 200; stroke-dashoffset: -124px; }
+  }
+
+  /* Trigger button on product card */
+  .zsempiri-quick-view-trigger {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    background-color: #f3ecdc;
+    color: #7b512f;
+    border: none;
+    border-radius: 50px;
+    padding: 0.8rem 1.6rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(123, 81, 47, 0.15);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 2;
+    text-transform: uppercase;
+  }
+
+  .card-wrapper:hover .zsempiri-quick-view-trigger {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .zsempiri-quick-view-trigger:hover {
+    background-color: #8F9779;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(123, 81, 47, 0.25);
+  }
+  
+  /* Ajánlott CSS felülírások a Quick View formhoz (pl. margók leszedése) */
+  .zsempiri-qv-content .product {
+    margin: 0 !important;
+  }
+  .zsempiri-qv-content .product__media-wrapper {
+    padding: 0 !important;
+  }
+  .zsempiri-qv-content .product__info-wrapper {
+    padding: 0 0 0 2rem !important;
+  }
+  @media screen and (max-width: 749px) {
+    .zsempiri-qv-modal {
+      width: 95%;
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+    }
+    .zsempiri-quick-view-trigger {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      bottom: 1rem;
+      padding: 0.6rem 1.2rem;
+    }
+    .zsempiri-qv-content .product__info-wrapper {
+      padding: 1.5rem 0 0 0 !important;
+    }
+    .zsempiri-qv-close {
+      top: 1rem;
+      right: 1rem;
+    }
+  }
+</style>
+
+<div class="zsempiri-qv-overlay" id="ZsempiriQuickViewModal">
+  <div class="zsempiri-qv-modal" role="dialog" aria-modal="true" aria-labelledby="ZsempiriQuickViewTitle">
+    <button class="zsempiri-qv-close" id="ZsempiriQuickViewClose" aria-label="Bezárás">
+      <svg viewBox="0 0 24 24">
+        <path d="M18 6L6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+    <div class="zsempiri-qv-content" id="ZsempiriQuickViewContent">
+      <!-- Injected HTML will appear here -->
+    </div>
+    <div class="zsempiri-qv-spinner">
+      <svg viewBox="25 25 50 50">
+        <circle cx="50" cy="50" r="20" fill="none"></circle>
+      </svg>
+    </div>
+  </div>
+</div>

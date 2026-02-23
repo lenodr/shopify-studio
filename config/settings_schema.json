@@ -1451,5 +1451,20 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "Zsempiri Custom Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product Card Customization"
+      },
+      {
+        "type": "color",
+        "id": "zsempiri_product_card_bg",
+        "label": "Product Card Background Color",
+        "default": "#F9F8F5"
+      }
+    ]
   }
 ]

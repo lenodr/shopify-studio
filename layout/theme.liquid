@@ -107,6 +107,7 @@
       }
 
       :root {
+        --zsempiri-card-bg: {{ settings.zsempiri_product_card_bg | default: '#F9F8F5' }};
         --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
@@ -399,6 +400,10 @@
       </script>
     {%- endif -%}
 
+    {%- comment -%} Zsempiri Custom Snippets {%- endcomment -%}
+    {% render 'zsempiri-quick-view' %}
+    <script src="{{ 'zsempiri-quick-view.js' | asset_url }}" defer="defer"></script>
+    
     {% render 'zsempiri-back-to-top' %}
   </body>
 </html>

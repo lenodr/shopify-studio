@@ -12,7 +12,6 @@
 
 :root {
   --zsempiri-cream: #f3ecdc;
-  --zsempiri-card-bg: #FAF9F6;
   --zsempiri-wood: #7b512f;
   --zsempiri-tan: #c9a882;
   --zsempiri-sage: #8F9779;
@@ -329,19 +328,117 @@ button[type="submit"]:not(.shopify-payment-button__button--unbranded):not(.quant
 
 
 /* ============================================================
-   G. KÁRTYA / ISLAND RENDSZER
-   Kártyák: off-white (#FAF9F6) lebegnek a cream (#f3ecdc) fölött
+   G. KÁRTYA / ISLAND RENDSZER (Soft-Tech Redesign)
    ============================================================ */
 
 .card--card,
-.card--standard .card__inner {
-  background-color: var(--zsempiri-card-bg);
+.card--standard {
+  background-color: var(--zsempiri-card-bg) !important;
+  border-radius: 2rem !important;
+  box-shadow: 0 0.6rem 2rem rgba(123, 81, 47, 0.08) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  padding: 1.5rem !important;
+  box-sizing: border-box !important;
 }
 
-.card-wrapper .card--card,
-.card-wrapper .card--standard {
-  box-shadow: 0 0.6rem 2rem rgba(123, 81, 47, 0.10) !important;
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+/* ─── Grid Spacing & Alignment Fix ──────────────── */
+:root {
+  --page-width: 1200px !important;
+}
+
+ul.grid.product-grid {
+  --grid-desktop-horizontal-spacing: 16px !important;
+  --grid-desktop-vertical-spacing: 25px !important;
+  --grid-mobile-horizontal-spacing: 16px !important;
+  --grid-mobile-vertical-spacing: 25px !important;
+}
+
+/* Force standard Shopify page containers to exactly match the custom collection 1200px bound */
+.page-width,
+.page-width-desktop,
+.collection.page-width,
+slider-component.page-width,
+slider-component.page-width-desktop {
+  max-width: 1200px !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media screen and (min-width: 750px) {
+
+  .page-width,
+  .page-width-desktop,
+  .collection.page-width,
+  slider-component.page-width,
+  slider-component.page-width-desktop,
+  .slider-component-desktop.page-width,
+  .slider-component-desktop.page-width-desktop {
+    padding-left: 5rem !important;
+    padding-right: 7rem !important;
+    /* Asymmetric right padding for sticky banner */
+  }
+}
+
+slider-component {
+  --desktop-margin-left-first-item: 0px !important;
+}
+
+/* Math correction for exact 4-column alignment */
+@media screen and (min-width: 750px) {
+  .slider.slider--desktop .slider__slide:first-child {
+    margin-left: 0 !important;
+  }
+
+  ul.grid.product-grid>.grid__item {
+    width: calc(25% - 1.2rem) !important;
+    /* (100% - 3*1.6rem) / 4 */
+    max-width: calc(25% - 1.2rem) !important;
+  }
+}
+
+/* Ensure inner card is transparent and maintains aspect ratio */
+.card--card .card__inner,
+.card--standard .card__inner {
+  background-color: transparent !important;
+  border-radius: 1.5rem !important;
+  overflow: hidden !important;
+  border: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  transform: none !important;
+  box-sizing: border-box !important;
+}
+
+.card__media {
+  border-radius: 1.5rem !important;
+  overflow: hidden !important;
+  position: relative;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.card__media .media {
+  border-radius: 1.5rem !important;
+  height: 0 !important;
+  padding-bottom: 100% !important;
+  /* Forces 1:1 Square */
+  position: relative;
+  overflow: hidden;
+}
+
+.card__media .media>img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .card-wrapper:hover .card--card,
@@ -350,30 +447,183 @@ button[type="submit"]:not(.shopify-payment-button__button--unbranded):not(.quant
   box-shadow: 0 1.2rem 3rem rgba(123, 81, 47, 0.16) !important;
 }
 
+.card__content {
+  text-align: center !important;
+  padding: 1.5rem 0 2rem 0 !important;
+  /* Adjusted padding since outer card has side padding */
+}
+
 .card__heading,
 .card__heading a {
   font-family: 'Grandstander', cursive !important;
   color: var(--zsempiri-wood) !important;
+  justify-content: center;
 }
 
 .card .price-item {
   color: var(--zsempiri-wood);
   font-family: 'Jost', sans-serif;
   font-weight: 600;
+  justify-content: center;
 }
 
 .card .price-item--sale {
   color: var(--zsempiri-accent-3);
 }
 
-/* Quick add gomb kártyán */
-.card__content .quick-add__submit,
-.quick-add-modal__toggle {
+.price {
+  justify-content: center !important;
+}
+
+/* ─── Hover Image Swap (Slide-Up) ───────────────────────── */
+
+.zsempiri-media-swap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.zsempiri-media-swap .zsempiri-img-primary,
+.zsempiri-media-swap .zsempiri-img-secondary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Base state */
+.zsempiri-media-swap .zsempiri-img-primary {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.zsempiri-media-swap .zsempiri-img-secondary {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+/* Hover state */
+.card-wrapper:hover .zsempiri-media-swap .zsempiri-img-primary {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.card-wrapper:hover .zsempiri-media-swap .zsempiri-img-secondary {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ─── Hover Action Bar (Attached to Bottom Edge) ─────────── */
+
+.card__media {
+  position: relative;
+}
+
+.zsempiri-card-actions {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  opacity: 0;
+  display: flex !important;
+  flex-direction: row !important;
+  /* Force side-by-side, overrides mobile column */
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  /* Slightly wider to match reference image */
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 10;
+  overflow: hidden;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
+  box-shadow: 0 -4px 15px rgba(123, 81, 47, 0.1);
+}
+
+.card-wrapper:hover .zsempiri-card-actions {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+button.zsempiri-action-btn,
+.zsempiri-action-btn {
+  flex: 1 !important;
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  padding: 0.8rem 0.6rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
+  min-height: auto !important;
+  min-width: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+/* Left side: Quick View (Sage Green) */
+button.zsempiri-quick-view-trigger,
+.zsempiri-quick-view-trigger {
   background-color: var(--zsempiri-sage) !important;
   color: #ffffff !important;
-  border-radius: 0.8rem !important;
-  font-family: 'Grandstander', cursive !important;
-  font-weight: 700 !important;
+}
+
+button.zsempiri-quick-view-trigger:hover,
+.zsempiri-quick-view-trigger:hover {
+  background-color: #7A8265 !important;
+}
+
+/* Right side: Quick Add (White -> Beige) */
+button.zsempiri-quick-add-submit,
+.zsempiri-quick-add-submit {
+  background-color: var(--zsempiri-card-bg) !important;
+  color: var(--zsempiri-wood) !important;
+}
+
+.zsempiri-quick-add-submit:hover {
+  background-color: #EFECE6 !important;
+}
+
+.zsempiri-action-btn svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.2s ease;
+}
+
+.zsempiri-action-btn:hover svg {
+  transform: scale(1.1);
+}
+
+.zsempiri-action-btn.is-disabled {
+  background-color: #ffffff !important;
+  color: rgba(123, 81, 47, 0.3) !important;
+  cursor: not-allowed;
+}
+
+/* Remove Divider */
+.zsempiri-action-divider {
+  display: none !important;
+}
+
+@media screen and (max-width: 749px) {
+  .zsempiri-card-actions {
+    opacity: 1;
+    /* Always show on mobile */
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Hide original Quick Add */
+.card__content .quick-add {
+  display: none !important;
 }
 
 
