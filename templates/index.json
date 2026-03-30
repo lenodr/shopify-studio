@@ -17,7 +17,7 @@
           "settings": {
             "image": "shopify://shop_images/Kesz_husveti_kosar_celofanba_csomagolva_szalaggal_keszre_csomagolt_ajandek.jpg",
             "label": "Ajándékok",
-            "link": "shopify://collections/ajandekotletek",
+            "link": "shopify://collections/ajandekok",
             "text_position": "center"
           }
         },
@@ -184,7 +184,7 @@
         "tab1": {
           "type": "tab",
           "settings": {
-            "collection": "ajandekotletek",
+            "collection": "ajandekok",
             "label": "Ajándékok"
           }
         },
@@ -210,7 +210,12 @@
           }
         }
       },
-      "block_order": ["tab1", "tab2", "tab3", "tab4"],
+      "block_order": [
+        "tab1",
+        "tab2",
+        "tab3",
+        "tab4"
+      ],
       "settings": {
         "heading": "Legújabb termékeink",
         "products_to_show": 8,
